@@ -19,6 +19,11 @@ func physics_update(delta: float) -> void:
 		player.velocity.x += player.input.move.x*player.friction*delta
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, player.friction*delta)
+	if(player.h_speed > player.h_min_speed):
+		print("running")
+		player.h_speed -= (player.h_speed - player.h_min_speed)/1.5
+		if(player.h_speed <= 100):
+			player.h_speed = player.h_min_speed	
 	player.velocity.x = clamp(player.velocity.x, -player.h_speed, player.h_speed)
 	player.move_and_slide()
 	
