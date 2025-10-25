@@ -4,7 +4,7 @@ extends CharacterBody2D
 var gravity: float = 8000.0
 var jump_gravity: float = 800.0
 var acceleration: float = 10000.0
-var friction: float = 25000.0
+var friction: float = 2500.0
 var air_acceleration: float = 9900.0
 var air_friction: float = 24000.0
 var h_min_speed: float = 300.0
@@ -14,15 +14,14 @@ var jump_impulse: float = 1500.0
 var flash_impulse: float = 4000.0
 var flash_cooldown: float = 3.0
 var can_flash: bool = true
+var knockback_impulse: float = 1000.0
 
 var health: int = 20
 
 var can_punch: bool = true
 var can_kick: bool = true
 
-var can_drop : bool = true
-
-@export var  move_state: State
+@export var move_state: State
 @export var facing_right: bool = false
 @export var input: PlayerInput
 
@@ -61,11 +60,11 @@ func _physics_process(delta: float) -> void:
 		
 	if input.punch and can_punch :
 		can_punch = false
-		perform_attack(punch_hitbox)
+		punch()
 		
-	if input.kick:
+	if input.kick and can_kick:
 		can_kick = false
-		perform_attack(kick_hitbox)
+		kick()
 	
 	if input.flash_step and can_flash and is_grounded():
 		# Courtesy of Ishfaq
@@ -97,16 +96,37 @@ func is_grounded() -> bool:
 	return false
 
 
-func perform_attack(hitbox: Area2D) -> void:
-	var overlapping_areas = hitbox.get_overlapping_areas()
+func punch() -> void:
+	var overlapping_areas = punch_hitbox.get_overlapping_areas()
 	for area in overlapping_areas:
 		if area is Hurtbox:
-			area.get_parent().health -= 1
-			print("attacking")
+			var hit_player = area.get_parent()
+			if hit_player.position.x < self.position.x:
+				hit_player.take_hit(1, -1)
+			else:
+				hit_player.take_hit(1, 1)
 	await get_tree().create_timer(0.5).timeout
 	can_punch = true
+
+
+func kick() -> void:
+	var overlapping_areas = kick_hitbox.get_overlapping_areas()
+	for area in overlapping_areas:
+		if area is Hurtbox:
+			var hit_player = area.get_parent()
+			if hit_player.position.x < self.position.x:
+				hit_player.take_hit(1, -1)
+			else:
+				hit_player.take_hit(1, 1)
+	await get_tree().create_timer(0.5).timeout
 	can_kick = true
 
+
+func take_hit(damage: int, direction: int) -> void:
+	self.health -= damage
+	h_speed = 13000.0
+	self.velocity.x += knockback_impulse * direction
+	state_machine.change_state(move_state)
 
 
 func handle_flash_step() -> void:
