@@ -13,15 +13,16 @@ func physics_update(delta: float) -> void:
 		state_machine.change_state(jump_state)
 	
 	player.velocity.y += player.gravity*delta
+
 	if (player.input.move.x != 0) and (player.velocity.x*player.input.move.x > 0):
 		player.velocity.x += player.input.move.x*player.acceleration*delta
 	elif player.input.move.x != 0:
 		player.velocity.x += player.input.move.x*player.friction*delta
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, player.friction*delta)
+
 	if(player.h_speed > player.h_min_speed):
-		print("running")
-		player.h_speed -= (player.h_speed - player.h_min_speed)/1.5
+		player.h_speed -= (player.h_speed - player.h_min_speed)/2
 		if(player.h_speed <= 100):
 			player.h_speed = player.h_min_speed	
 	player.velocity.x = clamp(player.velocity.x, -player.h_speed, player.h_speed)
