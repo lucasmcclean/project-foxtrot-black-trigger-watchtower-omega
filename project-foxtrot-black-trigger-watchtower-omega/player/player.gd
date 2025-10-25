@@ -17,6 +17,9 @@ var can_flash: bool = true
 
 var health: int = 20
 
+var can_punch: bool = true
+var can_kick: bool = true
+
 @export var  move_state: State
 @export var facing_right: bool = false
 @export var input: PlayerInput
@@ -54,10 +57,12 @@ func _physics_process(delta: float) -> void:
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
 		
-	if input.punch:
+	if input.punch and can_punch :
+		can_punch = false
 		perform_attack(punch_hitbox)
 		
 	if input.kick:
+		can_kick = false
 		perform_attack(kick_hitbox)
 	
 	if input.flash_step and can_flash and is_grounded():
@@ -88,6 +93,10 @@ func perform_attack(hitbox: Area2D) -> void:
 		if area is Hurtbox:
 			area.get_parent().health -= 1
 			print("attacking")
+	await get_tree().create_timer(0.5).timeout
+	can_punch = true
+	can_kick = true
+
 
 
 func handle_flash_step() -> void:
