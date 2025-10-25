@@ -11,8 +11,8 @@ var h_speed: float = 300.0
 var v_speed: float = 3000.0
 var jump_impulse: float = 1500.0
 
-@export var input : PlayerInput
-@onready var local_controller: LocalController = $LocalController
+@export var input: PlayerInput
+@onready var controller: Controller = $Controller
 @onready var state_machine: StateMachine = $StateMachine
 
 
@@ -25,7 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	local_controller.sample_input()
+	controller.sample_input()
 	state_machine.physics_update(delta)
 
 

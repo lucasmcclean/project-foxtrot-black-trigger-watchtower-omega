@@ -1,25 +1,22 @@
 class_name LocalController
-extends Node
-
-@export var player_input: PlayerInput
+extends Controller
 
 func sample_input() -> void:
-	if player_input == null:
+	if player.input == null:
 		return
 
-	player_input.move.x = (
+	player.input.move.x = (
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	)
-	player_input.move.y = (
+	player.input.move.y = (
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	)
 
-	player_input.jump = Input.is_action_just_pressed("jump")
-	player_input.punch = Input.is_action_just_pressed("punch")
-	player_input.kick = Input.is_action_just_pressed("kick")
-	player_input.flash_step = Input.is_action_just_pressed("flash_step")
+	player.input.jump = Input.is_action_just_pressed("jump")
+	player.input.punch = Input.is_action_just_pressed("punch")
+	player.input.kick = Input.is_action_just_pressed("kick")
+	player.input.flash_step = Input.is_action_just_pressed("flash_step")
 	
 	
-	if(player_input.jump):
+	if(player.input.jump):
 		print("Jumping in controller")
-	

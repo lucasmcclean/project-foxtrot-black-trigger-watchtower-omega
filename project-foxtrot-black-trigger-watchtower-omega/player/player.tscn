@@ -1,14 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdx3cerynkwbi"]
+[gd_scene load_steps=9 format=3 uid="uid://bdx3cerynkwbi"]
 
 [ext_resource type="Texture2D" uid="uid://nbtt4xedu5wp" path="res://icon.svg" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://0vn1v0sbxcag" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Script" uid="uid://d0afis4vj66tf" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Script" uid="uid://dwatss17v6sy" path="res://state_machine/state_machine.gd" id="2_rkbax"]
 [ext_resource type="Script" uid="uid://rehvhjgxdu1m" path="res://player/states/fall.gd" id="3_g6k8r"]
 [ext_resource type="Script" uid="uid://t8r54p5d2c00" path="res://player/states/idle.gd" id="4_boad6"]
 [ext_resource type="Script" uid="uid://raaue5ebiebo" path="res://player/states/jump.gd" id="5_rgyib"]
 [ext_resource type="Script" uid="uid://cftse0jl714nm" path="res://player/states/move.gd" id="6_hg6s5"]
-[ext_resource type="Script" uid="uid://bki1krgpg1do2" path="res://player/controller/local_controller.gd" id="9_hg6s5"]
-[ext_resource type="Resource" uid="uid://c71hxi52tpg2r" path="res://player_inputs/local_player_input.tres" id="10_8t03j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 32.0
@@ -16,7 +14,6 @@ height = 128.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_rkbax")
-input = ExtResource("10_8t03j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_onrkg")
@@ -62,7 +59,3 @@ target_position = Vector2(-1, 79)
 [node name="Right" type="RayCast2D" parent="GroundCasts"]
 position = Vector2(30, 60)
 target_position = Vector2(-1, 80)
-
-[node name="LocalController" type="Node" parent="."]
-script = ExtResource("9_hg6s5")
-player_input = ExtResource("10_8t03j")

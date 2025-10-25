@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bc6k2alunsfbg"]
+[gd_scene load_steps=8 format=3 uid="uid://bc6k2alunsfbg"]
 
 [ext_resource type="Texture2D" uid="uid://nbtt4xedu5wp" path="res://icon.svg" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bdx3cerynkwbi" path="res://player/player.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://bki1krgpg1do2" path="res://player/controller/local_controller.gd" id="3_1bvp3"]
+[ext_resource type="Resource" uid="uid://c71hxi52tpg2r" path="res://player/player_inputs/local_player_input.tres" id="3_7mycd"]
+[ext_resource type="Script" uid="uid://cbecrk3miq2is" path="res://player/controller/eeg_controller.gd" id="4_lquwl"]
+[ext_resource type="Resource" uid="uid://611yuv78cv3m" path="res://player/player_inputs/eeg_player_input.tres" id="5_272bh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(1153, 20)
@@ -22,5 +26,14 @@ texture = ExtResource("1_ig7tw")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 438)
 
-[node name="Player" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(206, 148)
+[node name="LocalPlayer" parent="." instance=ExtResource("2_0xm2m")]
+input = ExtResource("3_7mycd")
+
+[node name="Controller" type="Node" parent="LocalPlayer"]
+script = ExtResource("3_1bvp3")
+
+[node name="EEGPlayer" parent="." instance=ExtResource("2_0xm2m")]
+input = ExtResource("5_272bh")
+
+[node name="Controller" type="Node" parent="EEGPlayer"]
+script = ExtResource("4_lquwl")
