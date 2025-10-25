@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdx3cerynkwbi"]
+[gd_scene load_steps=11 format=3 uid="uid://bdx3cerynkwbi"]
 
 [ext_resource type="Texture2D" uid="uid://nbtt4xedu5wp" path="res://icon.svg" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://d0afis4vj66tf" path="res://player/player.gd" id="1_rkbax"]
@@ -11,6 +11,12 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 32.0
 height = 128.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boad6"]
+size = Vector2(80, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgyib"]
+size = Vector2(82, 20)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_rkbax")
@@ -59,3 +65,17 @@ target_position = Vector2(-1, 79)
 [node name="Right" type="RayCast2D" parent="GroundCasts"]
 position = Vector2(30, 60)
 target_position = Vector2(-1, 80)
+
+[node name="PunchHitbox" type="Area2D" parent="."]
+monitorable = false
+
+[node name="Puncher" type="CollisionShape2D" parent="PunchHitbox"]
+position = Vector2(73, -18)
+shape = SubResource("RectangleShape2D_boad6")
+
+[node name="KickHitbox" type="Area2D" parent="."]
+monitorable = false
+
+[node name="Kicker" type="CollisionShape2D" parent="KickHitbox"]
+position = Vector2(72, 37)
+shape = SubResource("RectangleShape2D_rgyib")

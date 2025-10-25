@@ -14,6 +14,8 @@ var jump_impulse: float = 1500.0
 @export var input: PlayerInput
 @onready var controller: Controller = $Controller
 @onready var state_machine: StateMachine = $StateMachine
+@onready var punch_hitbox: Area2D = $PunchHitbox
+@onready var kick_hitbox: Area2D = $KickHitbox
 
 var health: int = 20
 
@@ -29,6 +31,17 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	controller.sample_input()
 	state_machine.physics_update(delta)
+	if input.punch:
+		punch_hitbox.monitorable = true
+	else:
+		punch_hitbox.monitorable = false
+		
+	if input.kick:
+		kick_hitbox.monitorable = true
+	else:
+		kick_hitbox.monitorable = true
+		
+
 
 
 func _process(delta: float) -> void:
