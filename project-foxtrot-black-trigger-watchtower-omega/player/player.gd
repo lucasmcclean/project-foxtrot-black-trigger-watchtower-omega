@@ -11,8 +11,7 @@ var h_min_speed: float = 300.0
 var h_speed: float = 300.0
 var v_speed: float = 3000.0
 var jump_impulse: float = 1500.0
-var flash_distance: float = 500.0
-var flash_impulse: float = 10000.0
+var flash_impulse: float = 4000.0
 var flash_cooldown: float = 3.0
 var can_flash: bool = true
 
@@ -92,9 +91,15 @@ func perform_attack(hitbox: Area2D) -> void:
 
 
 func handle_flash_step() -> void:
+	if(input.move.x == 0):
+		return
 	h_speed = 30000.0
 	can_flash = false
-	velocity.x += flash_impulse
+	if(input.move.x > 0):
+		velocity.x -= flash_impulse
+	else:
+		velocity.x +=  flash_impulse
+		velocity.x += flash_impulse
 	state_machine.change_state(move_state)
 	await get_tree().create_timer(flash_cooldown).timeout
 	can_flash = true

@@ -4,15 +4,18 @@ extends PlayerState
 @export var idle_state: State
 @export var move_state: State
 
-var just_jumped: bool = true
+var just_jumped: bool = false
 
 
 func enter() -> void:
 	player.get_node("Sprite2D").modulate = Color(0.0, 0.848, 0.779, 1.0) # Light blue tint for falling
-	just_jumped = true
-	super()
-	player.velocity.y -= player.jump_impulse
-	just_jumped_timer()
+
+	if(!just_jumped):
+		super()
+		just_jumped = true
+		player.velocity.y -= player.jump_impulse
+		just_jumped_timer()
+		
 
 
 func physics_update(delta: float) -> void:
@@ -37,5 +40,5 @@ func physics_update(delta: float) -> void:
 
 #TODO make sure this works and isn't buggy
 func just_jumped_timer() -> void:
-	await get_tree().create_timer(.01).timeout
+	await get_tree().create_timer(0.5).timeout
 	just_jumped = false

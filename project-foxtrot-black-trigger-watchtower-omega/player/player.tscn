@@ -66,12 +66,12 @@ idle_state = NodePath("../Idle")
 [node name="GroundCasts" type="Node2D" parent="."]
 
 [node name="Left" type="RayCast2D" parent="GroundCasts"]
-position = Vector2(-30, 60)
-target_position = Vector2(-1, 79)
+position = Vector2(-30, 60.275)
+target_position = Vector2(-1, 9.725)
 
 [node name="Right" type="RayCast2D" parent="GroundCasts"]
-position = Vector2(30, 60)
-target_position = Vector2(-1, 80)
+position = Vector2(30, 60.275)
+target_position = Vector2(0, 9.724995)
 
 [node name="PunchHitbox" type="Area2D" parent="."]
 script = ExtResource("8_rgyib")
