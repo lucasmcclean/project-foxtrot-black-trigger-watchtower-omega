@@ -15,36 +15,26 @@ ACC_Y_RANGE = [-1.5, 1.5]
 # --- Data Collection Configuration ---
 SAMPLES_PER_WINDOW = 128  # 0.5 seconds at 256Hz (was 12 = 47ms)
 OVERLAP_SAMPLES = 0      # 25% overlap for smoother collection
-LABEL_MODE = 0            # Change to 1 when collecting command data
+LABEL_MODE = 3            # Change to 1 when collecting command data
 COUNT = 0
 
 class FeatureExtractor:
-    """Extract frequency domain features from EEG data"""
-    
     def __init__(self, sfreq=256):
         self.sfreq = sfreq
         
     def extract_features(self, data):
-        """
-        Extract features from EEG window
-        data: (n_samples, n_channels) array
-        returns: flattened feature vector
-        """
         n_samples, n_channels = data.shape
         features = []
         
         for ch in range(n_channels):
             channel_data = data[:, ch]
             
-            # Time domain features
             features.append(np.mean(channel_data))
             features.append(np.std(channel_data))
             features.append(np.max(channel_data) - np.min(channel_data))
             
-            # Frequency domain features
             freqs, psd = signal.welch(channel_data, fs=self.sfreq, nperseg=min(64, n_samples))
             
-            # Band powers
             delta = self._band_power(freqs, psd, 1, 4)
             theta = self._band_power(freqs, psd, 4, 8)
             alpha = self._band_power(freqs, psd, 8, 13)
@@ -53,7 +43,6 @@ class FeatureExtractor:
             
             features.extend([delta, theta, alpha, beta, gamma])
             
-            # Ratios (important for mental state detection)
             features.append(beta / alpha if alpha > 0 else 0)
             features.append(theta / alpha if alpha > 0 else 0)
             
@@ -78,39 +67,25 @@ def setup_lsl_inlet(stream_type):
 
 
 def main():
-    """
-    Connects to Muse LSL streams, and plots EEG and Accelerometer data in real-time.
-    Collects improved feature set for ML training.
-    """
-    # Setup LSL Streams
     eeg_inlet = setup_lsl_inlet('EEG')
-    acc_inlet = setup_lsl_inlet('ACC')
 
     eeg_info = eeg_inlet.info()
-    acc_info = acc_inlet.info()
 
     eeg_sfreq = int(eeg_info.nominal_srate())
-    acc_sfreq = int(acc_info.nominal_srate())
 
     n_channels_eeg = eeg_info.channel_count()
-    n_channels_acc = acc_info.channel_count()
 
     # Initialize feature extractor
     extractor = FeatureExtractor(sfreq=eeg_sfreq)
 
     # Initialize Data Buffers
     eeg_buffer_size = int(eeg_sfreq * WINDOW_LENGTH)
-    acc_buffer_size = int(acc_sfreq * WINDOW_LENGTH)
 
     eeg_data = np.zeros((eeg_buffer_size, n_channels_eeg))
-    acc_data = np.zeros((acc_buffer_size, n_channels_acc))
-    
-    # Rolling buffer for feature extraction
     eeg_window_buffer = deque(maxlen=SAMPLES_PER_WINDOW)
     samples_since_last_save = 0
     
     eeg_timestamps = np.linspace(-WINDOW_LENGTH, 0, eeg_buffer_size)
-    acc_timestamps = np.linspace(-WINDOW_LENGTH, 0, acc_buffer_size)
 
     # Setup Matplotlib Plots
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8), sharex=True)
@@ -136,17 +111,6 @@ def main():
     ax1.set_yticklabels(ch_names)
     ax1.grid(True, linestyle='--', alpha=0.6)
     ax1.invert_yaxis()
-
-    # Accelerometer Plot
-    acc_lines = [ax2.plot(acc_timestamps, acc_data[:, i], lw=1)[0] for i in range(n_channels_acc)]
-    ax2.set_title('Accelerometer')
-    ax2.set_ylabel('g')
-    ax2.set_xlabel('Time (s)')
-    ax2.set_ylim(ACC_Y_RANGE)
-    ax2.legend(['X', 'Y', 'Z'], loc='upper right')
-    ax2.grid(True, linestyle='--', alpha=0.6)
-
-    plt.tight_layout()
 
     # Real-time Update Function
     def update(frame):
@@ -191,17 +155,7 @@ def main():
             for i in range(n_channels_eeg):
                 eeg_lines[i].set_ydata(eeg_data[:, i] + (i * EEG_OFFSET))
 
-        # Update ACC Data
-        acc_samples, _ = acc_inlet.pull_chunk(timeout=0.0, max_samples=acc_buffer_size)
-        if acc_samples:
-            new_samples_count = len(acc_samples)
-            acc_data[:] = np.roll(acc_data, -new_samples_count, axis=0)
-            acc_data[-new_samples_count:, :] = acc_samples
-
-            for i in range(n_channels_acc):
-                acc_lines[i].set_ydata(acc_data[:, i])
-        
-        return eeg_lines + acc_lines
+        return eeg_lines
 
     # Create CSV with header
     filename = 'eeg_features.csv'
