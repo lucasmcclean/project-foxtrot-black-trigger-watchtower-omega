@@ -3,7 +3,7 @@ extends Node
 
 @export var player_input: PlayerInput
 
-func sample_input(_delta: float) -> void:
+func sample_input() -> void:
 	if player_input == null:
 		return
 
@@ -18,3 +18,8 @@ func sample_input(_delta: float) -> void:
 	player_input.punch = Input.is_action_just_pressed("punch")
 	player_input.kick = Input.is_action_just_pressed("kick")
 	player_input.flash_step = Input.is_action_just_pressed("flash_step")
+	
+	
+	if(player_input.jump):
+		print("Jumping in controller")
+	
