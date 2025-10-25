@@ -15,6 +15,8 @@ var jump_impulse: float = 1500.0
 @onready var controller: Controller = $Controller
 @onready var state_machine: StateMachine = $StateMachine
 
+var health: int = 20
+
 
 func _ready() -> void:
 	state_machine.initialize()

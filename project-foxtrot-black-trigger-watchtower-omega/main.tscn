@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bc6k2alunsfbg"]
+[gd_scene load_steps=9 format=3 uid="uid://bc6k2alunsfbg"]
 
+[ext_resource type="Script" uid="uid://dv8lu25mufguh" path="res://main.gd" id="1_272bh"]
 [ext_resource type="Texture2D" uid="uid://nbtt4xedu5wp" path="res://icon.svg" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bdx3cerynkwbi" path="res://player/player.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://bki1krgpg1do2" path="res://player/controller/local_controller.gd" id="3_1bvp3"]
@@ -11,6 +12,7 @@
 size = Vector2(1153, 20)
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_272bh")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -27,12 +29,14 @@ texture = ExtResource("1_ig7tw")
 position = Vector2(576, 438)
 
 [node name="LocalPlayer" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(34, 559)
 input = ExtResource("3_7mycd")
 
 [node name="Controller" type="Node" parent="LocalPlayer"]
 script = ExtResource("3_1bvp3")
 
 [node name="EEGPlayer" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(1100, 560)
 input = ExtResource("5_272bh")
 
 [node name="Controller" type="Node" parent="EEGPlayer"]
