@@ -10,11 +10,6 @@ func enter() -> void:
 	super()
 
 
-func handle_input(_event: InputEvent) -> void:
-	print("we are in fall state")
-	pass
-
-
 func physics_update(delta: float) -> void:
 	player.velocity.y += player.gravity*delta
 	if (player.input.move.x != 0) and (player.velocity.x*player.input.move.x > 0):

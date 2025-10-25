@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdx3cerynkwbi"]
+[gd_scene load_steps=14 format=3 uid="uid://bdx3cerynkwbi"]
 
 [ext_resource type="Texture2D" uid="uid://nbtt4xedu5wp" path="res://icon.svg" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://d0afis4vj66tf" path="res://player/player.gd" id="1_rkbax"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://raaue5ebiebo" path="res://player/states/jump.gd" id="5_rgyib"]
 [ext_resource type="Script" uid="uid://cftse0jl714nm" path="res://player/states/move.gd" id="6_hg6s5"]
 [ext_resource type="Script" uid="uid://dpngoys84lbbu" path="res://player/hitboxes/hitbox.gd" id="8_rgyib"]
+[ext_resource type="Script" uid="uid://bpsxqo0flqles" path="res://player/hurtbox.gd" id="9_hg6s5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 32.0
@@ -90,6 +91,7 @@ shape = SubResource("RectangleShape2D_rgyib")
 debug_color = Color(1.1070073e-06, 0.6320222, 0.45936626, 0.41960785)
 
 [node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("9_hg6s5")
 
 [node name="Hurter" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-3.4059792e-06, 0)

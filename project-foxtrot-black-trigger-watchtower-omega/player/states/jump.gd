@@ -15,10 +15,6 @@ func enter() -> void:
 	just_jumped_timer()
 
 
-func process_input(_event: InputEvent) -> void:
-	pass
-
-
 func physics_update(delta: float) -> void:
 	player.velocity.y += player.jump_gravity*delta
 	if (player.input.move.x != 0) and (player.velocity.x*player.input.move.x > 0):

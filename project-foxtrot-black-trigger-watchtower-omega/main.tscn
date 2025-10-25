@@ -35,6 +35,7 @@ script = ExtResource("3_1bvp3")
 
 [node name="EEGPlayer" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(-200, 45)
+facing_right = true
 input = ExtResource("5_272bh")
 
 [node name="Controller" type="Node" parent="EEGPlayer"]
