@@ -15,28 +15,26 @@ size = Vector2(1153, 20)
 script = ExtResource("1_272bh")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 129)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(575.5, 636)
 shape = SubResource("RectangleShape2D_0xm2m")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(576.5, 636.5)
 scale = Vector2(9.0078125, 0.16406259)
 texture = ExtResource("1_ig7tw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 438)
 
 [node name="LocalPlayer" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(34, 559)
+position = Vector2(200, 45)
 input = ExtResource("3_7mycd")
 
 [node name="Controller" type="Node" parent="LocalPlayer"]
 script = ExtResource("3_1bvp3")
 
 [node name="EEGPlayer" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(1100, 560)
+position = Vector2(-200, 45)
 input = ExtResource("5_272bh")
 
 [node name="Controller" type="Node" parent="EEGPlayer"]

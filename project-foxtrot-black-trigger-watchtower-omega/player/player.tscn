@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdx3cerynkwbi"]
+[gd_scene load_steps=13 format=3 uid="uid://bdx3cerynkwbi"]
 
 [ext_resource type="Texture2D" uid="uid://nbtt4xedu5wp" path="res://icon.svg" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://d0afis4vj66tf" path="res://player/player.gd" id="1_rkbax"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://t8r54p5d2c00" path="res://player/states/idle.gd" id="4_boad6"]
 [ext_resource type="Script" uid="uid://raaue5ebiebo" path="res://player/states/jump.gd" id="5_rgyib"]
 [ext_resource type="Script" uid="uid://cftse0jl714nm" path="res://player/states/move.gd" id="6_hg6s5"]
+[ext_resource type="Script" uid="uid://dpngoys84lbbu" path="res://player/hitboxes/hitbox.gd" id="8_rgyib"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 32.0
@@ -18,7 +19,11 @@ size = Vector2(80, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgyib"]
 size = Vector2(82, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hg6s5"]
+size = Vector2(62.857147, 128)
+
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.7, 0.7)
 script = ExtResource("1_rkbax")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -67,15 +72,28 @@ position = Vector2(30, 60)
 target_position = Vector2(-1, 80)
 
 [node name="PunchHitbox" type="Area2D" parent="."]
-monitorable = false
+script = ExtResource("8_rgyib")
 
 [node name="Puncher" type="CollisionShape2D" parent="PunchHitbox"]
-position = Vector2(73, -18)
+position = Vector2(74.42857, -18.000002)
 shape = SubResource("RectangleShape2D_boad6")
+debug_color = Color(7.70092e-07, 0.5665836, 0.86229104, 0.41960785)
 
 [node name="KickHitbox" type="Area2D" parent="."]
-monitorable = false
+script = ExtResource("8_rgyib")
+type = 1
 
 [node name="Kicker" type="CollisionShape2D" parent="KickHitbox"]
-position = Vector2(72, 37)
+position = Vector2(74.85714, 37)
 shape = SubResource("RectangleShape2D_rgyib")
+debug_color = Color(1.1070073e-06, 0.6320222, 0.45936626, 0.41960785)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="Hurter" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-3.4059792e-06, 0)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_hg6s5")
+debug_color = Color(0.88469225, 0.31448165, 0.2965871, 0.41960785)
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

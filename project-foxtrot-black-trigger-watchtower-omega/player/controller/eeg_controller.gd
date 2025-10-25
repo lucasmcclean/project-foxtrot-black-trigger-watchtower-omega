@@ -1,7 +1,7 @@
 class_name EEGInputController
 extends Controller
 
-@export var websocket_url: String = "ws://127.0.0.1:8080"
+@export var websocket_url: String = "wss://tennille-unsunny-populously.ngrok-free.dev"
 
 signal connected
 signal disconnected

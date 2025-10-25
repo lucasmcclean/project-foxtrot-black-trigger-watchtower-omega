@@ -14,8 +14,11 @@ var jump_impulse: float = 1500.0
 @export var input: PlayerInput
 @onready var controller: Controller = $Controller
 @onready var state_machine: StateMachine = $StateMachine
+
 @onready var punch_hitbox: Area2D = $PunchHitbox
 @onready var kick_hitbox: Area2D = $KickHitbox
+
+@onready var hurtbox: Area2D = $Hurtbox
 
 var health: int = 20
 
@@ -32,16 +35,10 @@ func _physics_process(delta: float) -> void:
 	controller.sample_input()
 	state_machine.physics_update(delta)
 	if input.punch:
-		punch_hitbox.monitorable = true
-	else:
-		punch_hitbox.monitorable = false
+		perform_attack(punch_hitbox)
 		
 	if input.kick:
-		kick_hitbox.monitorable = true
-	else:
-		kick_hitbox.monitorable = true
-		
-
+		perform_attack(kick_hitbox)
 
 
 func _process(delta: float) -> void:
@@ -54,3 +51,18 @@ func is_grounded() -> bool:
 		if cast.is_colliding():
 			return true
 	return false
+
+
+func perform_attack(hitbox: Area2D) -> void:
+	var overlapping_areas = hitbox.get_overlapping_areas()
+	for area in overlapping_areas:
+		if area.name == "Hurtbox" and area.get_parent() != self:
+			print("taking damage")
+			area.get_parent().health -= 1
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if not area is Hitbox:
+		return
+
+	health -= 1
