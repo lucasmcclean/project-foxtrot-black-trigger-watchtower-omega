@@ -31,7 +31,6 @@ func physics_update(delta: float) -> void:
 	player.move_and_slide()
 	
 	if player.is_grounded() and !is_zero_approx(player.velocity.x) and !just_jumped:
-		print(player.is_grounded())
 		state_machine.change_state(move_state)
 	elif player.is_grounded() and !just_jumped:
 		state_machine.change_state(idle_state)

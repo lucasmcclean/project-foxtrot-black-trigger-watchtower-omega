@@ -47,6 +47,20 @@ script = ExtResource("4_lquwl")
 [node name="Platform" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
-position = Vector2(4, 0)
+position = Vector2(2, 49)
+shape = SubResource("RectangleShape2D_272bh")
+one_way_collision = true
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+position = Vector2(-129, -38)
+shape = SubResource("RectangleShape2D_272bh")
+one_way_collision = true
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+position = Vector2(150, -106)
 shape = SubResource("RectangleShape2D_272bh")
 one_way_collision = true

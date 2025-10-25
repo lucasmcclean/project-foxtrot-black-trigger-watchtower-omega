@@ -11,6 +11,7 @@ func enter() -> void:
 func physics_update(delta: float) -> void:
 	if player.input.jump and player.is_grounded():
 		state_machine.change_state(jump_state)
+		return
 	
 	player.velocity.y += player.gravity*delta
 

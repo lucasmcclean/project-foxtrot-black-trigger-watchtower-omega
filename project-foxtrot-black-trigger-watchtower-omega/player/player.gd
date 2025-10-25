@@ -1,20 +1,20 @@
 class_name Player
 extends CharacterBody2D
 
-var gravity: float = 8000.0
-var jump_gravity: float = 800.0
+var gravity: float = 2700.0
+var jump_gravity: float = 500.0
 var acceleration: float = 10000.0
-var friction: float = 2500.0
+var friction: float = 2600.0
 var air_acceleration: float = 9900.0
 var air_friction: float = 24000.0
 var h_min_speed: float = 300.0
 var h_speed: float = 300.0
 var v_speed: float = 3000.0
-var jump_impulse: float = 1500.0
-var flash_impulse: float = 4000.0
+var jump_impulse: float = 650.0
+var flash_impulse: float = 2000.0
 var flash_cooldown: float = 3.0
 var can_flash: bool = true
-var knockback_impulse: float = 1000.0
+var knockback_impulse: float = 500.0
 
 var health: int = 20
 
@@ -76,10 +76,13 @@ func _physics_process(delta: float) -> void:
 		hurtbox.monitoring = true
 	
 	if input.crouch and is_grounded():
-		print("We are")
+		# Temporarily disable one-way collision
 		set_collision_mask_value(1, false)
-	else:
+		await get_tree().create_timer(0.3).timeout
 		set_collision_mask_value(1, true)
+
+	
+		
 		
 
 	
@@ -132,7 +135,7 @@ func take_hit(damage: int, direction: int) -> void:
 func handle_flash_step() -> void:
 	if(input.move.x == 0):
 		return
-	h_speed = 30000.0
+	h_speed = 3000.0
 	can_flash = false
 	if(input.move.x > 0):
 		velocity.x -= flash_impulse
