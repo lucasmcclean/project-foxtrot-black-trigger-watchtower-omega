@@ -20,6 +20,8 @@ var health: int = 20
 var can_punch: bool = true
 var can_kick: bool = true
 
+var can_drop : bool = true
+
 @export var  move_state: State
 @export var facing_right: bool = false
 @export var input: PlayerInput
@@ -73,7 +75,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		hurtbox.monitorable = true
 		hurtbox.monitoring = true
+	
+	if input.crouch and is_grounded():
+		print("We are")
+		set_collision_mask_value(1, false)
+	else:
+		set_collision_mask_value(1, true)
+		
 
+	
 
 func _process(delta: float) -> void:
 	state_machine.update(delta)
