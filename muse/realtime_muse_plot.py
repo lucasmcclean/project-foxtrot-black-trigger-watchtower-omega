@@ -10,7 +10,7 @@ import numpy as np
 from pylsl import StreamInlet, resolve_byprop
 from scipy import signal
 
-import websockets   
+import websockets
 
 # -------------------------
 # --- CONFIG / CONSTANTS ---
@@ -24,7 +24,7 @@ GYRO_BUFFER = 360
 GYRO_CALIB_DURATION = 2.0
 EEG_CONFIDENCE_THRESHOLD = 0.75
 
-POSITION_THRESHOLD = 12.0
+POSITION_THRESHOLD = 7.0
 HOLD_TIME = 0.1
 GYRO_PULL_MAX = 50
 SLEEP_DELAY = 0
