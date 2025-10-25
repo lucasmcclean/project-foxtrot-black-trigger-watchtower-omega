@@ -1,9 +1,9 @@
-class_name LocalInputController
+class_name LocalController
 extends Node
 
 @export var player_input: PlayerInput
 
-func _process(_delta: float) -> void:
+func sample_input() -> void:
 	if player_input == null:
 		return
 
