@@ -10,6 +10,7 @@ var just_jumped: bool = false
 func enter() -> void:
 	if(!just_jumped):
 		super()
+		player.jump_sound.play()
 		just_jumped = true
 		player.velocity.y -= player.jump_impulse
 		just_jumped_timer()

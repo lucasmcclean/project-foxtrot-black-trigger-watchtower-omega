@@ -44,6 +44,12 @@ var can_kick: bool = true
 @onready var particles: GPUParticles2D = $GlowParticle
 @onready var dirt_particles: GPUParticles2D = $DirtParticle
 
+@onready var dash_sound: AudioStreamPlayer2D = $Dash
+@onready var punch_sound: AudioStreamPlayer2D = $Punch
+@onready var kick_sound: AudioStreamPlayer2D = $Kick
+@onready var damage_sound: AudioStreamPlayer2D = $Damage
+@onready var jump_sound: AudioStreamPlayer2D = $Jump
+
 
 func _ready() -> void:
 	sprite.texture = sprite_sheet
@@ -118,6 +124,7 @@ func is_grounded() -> bool:
 
 func punch() -> void:
 	animation.play("punch", -1, 10)
+	punch_sound.play()
 	var overlapping_areas = punch_hitbox.get_overlapping_areas()
 	await get_tree().create_timer(0.25).timeout
 	for area in overlapping_areas:
@@ -136,6 +143,7 @@ func punch() -> void:
 
 func kick() -> void:
 	animation.play("kick", -1, 15)
+	kick_sound.play()
 	var overlapping_areas = kick_hitbox.get_overlapping_areas()
 	await get_tree().create_timer(0.25).timeout
 	for area in overlapping_areas:
@@ -153,6 +161,7 @@ func kick() -> void:
 
 
 func take_hit(damage: int, direction: int) -> void:
+	damage_sound.play()
 	self.health -= damage
 	h_speed = 13000.0
 	self.velocity.x += knockback_impulse * direction
@@ -161,6 +170,7 @@ func take_hit(damage: int, direction: int) -> void:
 
 
 func handle_flash_step() -> void:
+	dash_sound.play()
 	h_speed = 3000.0
 	can_flash = false
 	if input.move.x > 0:

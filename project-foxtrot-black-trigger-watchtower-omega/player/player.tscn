@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bdx3cerynkwbi"]
+[gd_scene load_steps=36 format=3 uid="uid://bdx3cerynkwbi"]
 
 [ext_resource type="Script" uid="uid://d0afis4vj66tf" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Script" uid="uid://dwatss17v6sy" path="res://state_machine/state_machine.gd" id="2_rkbax"]
@@ -10,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://b2ja7boe003hu" path="res://assets/PLAYER 1 SPRITE SHEET 64 BIT.png" id="9_8t03j"]
 [ext_resource type="Script" uid="uid://bpsxqo0flqles" path="res://player/hurtbox.gd" id="9_hg6s5"]
 [ext_resource type="Texture2D" uid="uid://u7iyxdd87o2e" path="res://assets/SLASH SPRITE.png" id="10_2ieo8"]
+[ext_resource type="AudioStream" uid="uid://cpy6khp6jvm5n" path="res://assets/punch.wav" id="11_2ieo8"]
+[ext_resource type="AudioStream" uid="uid://5280f4koaeep" path="res://assets/jump.wav" id="11_kb6p2"]
+[ext_resource type="AudioStream" uid="uid://cn0kg47tl6xr8" path="res://assets/dash.wav" id="11_yllr7"]
+[ext_resource type="AudioStream" uid="uid://ic7fmxdmyrp2" path="res://assets/dmg.wav" id="13_kb6p2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 17.142857
@@ -931,6 +935,27 @@ metadata/_custom_type_script = "uid://dpngoys84lbbu"
 position = Vector2(60.71428, -27.14285)
 scale = Vector2(0.9999992, 0.9999992)
 shape = SubResource("RectangleShape2D_8t03j")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(8.174351e-06, 0)
+scale = Vector2(0.99999934, 0.99999934)
+stream = ExtResource("11_kb6p2")
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(2.7247836e-06, 0)
+scale = Vector2(0.99999976, 0.99999976)
+stream = ExtResource("11_yllr7")
+
+[node name="Kick" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(0.99999994, 0.99999994)
+stream = ExtResource("11_2ieo8")
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(0.99999994, 0.99999994)
+stream = ExtResource("13_kb6p2")
+
+[node name="Punch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_2ieo8")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="EEGScan" to="." method="_on_eeg_scan_area_entered"]
