@@ -1,4 +1,4 @@
-extends ProgressBar
+extends TextureProgressBar
 
 @export var player: Player
 @onready var particles: GPUParticles2D = $GlowParticle
@@ -14,8 +14,7 @@ func _process(delta: float) -> void:
 	if player.health < last_health:
 		particles.restart()
 		particles.emitting = true
-
-	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(self, "value", player.health, 0.2)
+	value = player.health
 
 	last_health = player.health
+	print(value)

@@ -1,4 +1,4 @@
-extends ProgressBar
+extends TextureProgressBar
 
 @export var player: Player
 @onready var particles: GPUParticles2D = $GlowParticle

@@ -7,15 +7,13 @@
 [ext_resource type="Resource" uid="uid://c71hxi52tpg2r" path="res://player/player_inputs/local_player_input.tres" id="3_7mycd"]
 [ext_resource type="Script" uid="uid://cbecrk3miq2is" path="res://player/controller/eeg_controller.gd" id="4_lquwl"]
 [ext_resource type="Resource" uid="uid://611yuv78cv3m" path="res://player/player_inputs/eeg_player_input.tres" id="5_272bh"]
-[ext_resource type="Script" uid="uid://dyknlw5lm13aj" path="res://health_bar_local.gd" id="8_kek77"]
+[ext_resource type="Texture2D" uid="uid://crwm7q3wpdhdf" path="res://assets/HPFULLBARATLAS.tres" id="5_yaehf"]
+[ext_resource type="Texture2D" uid="uid://b1q61ke6q21ei" path="res://assets/HPBARATLAS.tres" id="6_yaehf"]
 [ext_resource type="Script" uid="uid://dhy7ioayo4wtn" path="res://health_bar_eeg.gd" id="9_4c57u"]
 [ext_resource type="Texture2D" uid="uid://7rntmpnjtitn" path="res://assets/MOUNTAIN.png" id="10_efxa6"]
 [ext_resource type="Texture2D" uid="uid://5hewunhne21n" path="res://assets/FLOOR .png" id="11_dg77c"]
 [ext_resource type="Texture2D" uid="uid://cc1k6ngqfc64k" path="res://assets/SUN.png" id="13_w48qg"]
 [ext_resource type="Texture2D" uid="uid://b2k2ysa4qy7js" path="res://assets/CLOUDS.png" id="14_w48qg"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efxa6"]
-bg_color = Color(0.87365526, 0.17387769, 0.27908936, 1)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kek77"]
 lifetime_randomness = 0.32
@@ -26,7 +24,7 @@ initial_velocity_max = 300.0
 gravity = Vector3(0, 98, 0)
 scale_min = 2.0
 scale_max = 3.0
-color = Color(0.8550397, 0.27846763, 0.44767332, 1)
+color = Color(0.79607844, 0, 0.07058824, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(1153, 20)
@@ -52,52 +50,50 @@ texture = ExtResource("10_efxa6")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="HealthBarLocal" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
-anchors_preset = -1
-anchor_bottom = -0.041666668
-offset_left = 61.0
-offset_top = 29.0
-offset_right = 246.0
-offset_bottom = 61.0
-theme_override_colors/font_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
-theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
-value = 100.0
-show_percentage = false
-script = ExtResource("8_kek77")
+[node name="HealthBarLocal" type="TextureProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
+offset_left = 46.239994
+offset_top = 28.900005
+offset_right = 686.24
+offset_bottom = 388.9
+scale = Vector2(0.7, 0.7)
+max_value = 20.0
+value = 20.0
+texture_under = ExtResource("5_yaehf")
+texture_progress = ExtResource("6_yaehf")
+script = ExtResource("9_4c57u")
 player = NodePath("../../LocalPlayer")
-metadata/_edit_use_anchors_ = true
 
 [node name="GlowParticle" type="GPUParticles2D" parent="HUD/HealthBarLocal"]
-position = Vector2(174, 9)
+position = Vector2(244.0004, 17.142426)
+rotation = -2.0722551
+scale = Vector2(1.4285713, 1.4285713)
 emitting = false
 amount = 20
-lifetime = 0.3
+lifetime = 0.12
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_kek77")
 
-[node name="HealthBarEEG" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
-anchors_preset = -1
-anchor_top = -0.038635932
-anchor_bottom = -0.077271864
-offset_left = 561.0
-offset_top = 61.908936
-offset_right = 746.0
-offset_bottom = 93.908936
+[node name="HealthBarEEG" type="TextureProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
+offset_left = 610.0
+offset_top = 55.0
+offset_right = 1250.0
+offset_bottom = 415.0
 rotation = 3.1415927
-theme_override_colors/font_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
-theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
-value = 100.0
-show_percentage = false
+scale = Vector2(0.7, 0.7)
+max_value = 20.0
+value = 19.0
+texture_under = ExtResource("5_yaehf")
+texture_progress = ExtResource("6_yaehf")
 script = ExtResource("9_4c57u")
 player = NodePath("../../EEGPlayer")
-metadata/_edit_use_anchors_ = true
 
 [node name="GlowParticle" type="GPUParticles2D" parent="HUD/HealthBarEEG"]
-position = Vector2(175, 7.9999695)
-rotation = 1.0693375
+position = Vector2(260, 21.428558)
+rotation = -1.0029176
+scale = Vector2(2.040816, 2.040816)
 emitting = false
 amount = 20
-lifetime = 0.3
+lifetime = 0.12
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_kek77")
 
