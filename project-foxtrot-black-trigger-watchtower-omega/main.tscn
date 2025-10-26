@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bc6k2alunsfbg"]
+[gd_scene load_steps=14 format=3 uid="uid://bc6k2alunsfbg"]
 
 [ext_resource type="Script" uid="uid://dv8lu25mufguh" path="res://main.gd" id="1_272bh"]
 [ext_resource type="Texture2D" uid="uid://nbtt4xedu5wp" path="res://icon.svg" id="1_ig7tw"]
@@ -12,6 +12,17 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efxa6"]
 bg_color = Color(0.87365526, 0.17387769, 0.27908936, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kek77"]
+lifetime_randomness = 0.32
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 130.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 98, 0)
+scale_min = 2.0
+scale_max = 3.0
+color = Color(0.8550397, 0.27846763, 0.44767332, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(1153, 20)
@@ -36,17 +47,35 @@ show_percentage = false
 script = ExtResource("8_kek77")
 player = NodePath("../../LocalPlayer")
 
+[node name="GlowParticle" type="GPUParticles2D" parent="HUD/HealthBarLocal"]
+position = Vector2(162, 14)
+emitting = false
+amount = 20
+lifetime = 0.3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_kek77")
+
 [node name="HealthBarEEG" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
-offset_left = 440.0
-offset_top = 19.0
-offset_right = 625.0
-offset_bottom = 51.0
+offset_left = 612.0
+offset_top = 53.0
+offset_right = 797.0
+offset_bottom = 85.0
+rotation = 3.1415927
 theme_override_colors/font_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
 value = 100.0
 show_percentage = false
 script = ExtResource("9_4c57u")
 player = NodePath("../../EEGPlayer")
+
+[node name="GlowParticle" type="GPUParticles2D" parent="HUD/HealthBarEEG"]
+position = Vector2(165, 15.999987)
+rotation = 1.0693375
+emitting = false
+amount = 20
+lifetime = 0.3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_kek77")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 129)
