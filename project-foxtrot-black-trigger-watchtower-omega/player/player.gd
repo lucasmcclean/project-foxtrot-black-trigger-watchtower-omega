@@ -107,7 +107,7 @@ func punch() -> void:
 				hit_player.take_hit(1, -1)
 			else:
 				hit_player.take_hit(1, 1)
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.3).timeout
 	can_punch = true
 	animation.stop()
 
@@ -125,7 +125,7 @@ func kick() -> void:
 				hit_player.take_hit(1, -1)
 			else:
 				hit_player.take_hit(1, 1)
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.3).timeout
 	can_kick = true
 	animation.stop()
 
