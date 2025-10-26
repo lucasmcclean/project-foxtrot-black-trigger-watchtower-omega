@@ -8,7 +8,7 @@ var friction: float = 2600.0
 var air_acceleration: float = 9900.0
 var air_friction: float = 24000.0
 var h_min_speed: float = 300.0
-var h_speed: float = 300.0
+var h_speed: float = 200.0
 var v_speed: float = 3000.0
 var jump_impulse: float = 650.0
 var jump_buffer_time: float = 0.2
@@ -28,6 +28,7 @@ var can_kick: bool = true
 @export var input: PlayerInput
 
 @onready var controller: Controller = $Controller
+@onready var body: CollisionShape2D = $CollisionShape2D
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation: AnimationPlayer = $AnimationPlayer
@@ -41,6 +42,7 @@ var can_kick: bool = true
 func _ready() -> void:
 	if not facing_right:
 		sprite.flip_h = true
+		body.scale.x *= -1
 		hurtbox.scale.x *= -1
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
@@ -54,12 +56,14 @@ func _physics_process(delta: float) -> void:
 	if input.move.x < 0 and facing_right:
 		facing_right = false
 		sprite.flip_h = true
+		body.scale.x *= -1
 		hurtbox.scale.x *= -1
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
 	elif input.move.x > 0 and not facing_right:
 		facing_right = true
 		sprite.flip_h = false
+		body.scale.x *= -1
 		hurtbox.scale.x *= -1
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
