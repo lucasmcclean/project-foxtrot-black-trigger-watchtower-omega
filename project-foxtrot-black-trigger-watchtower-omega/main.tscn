@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bc6k2alunsfbg"]
+[gd_scene load_steps=24 format=3 uid="uid://bc6k2alunsfbg"]
 
 [ext_resource type="Script" uid="uid://dv8lu25mufguh" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://bdx3cerynkwbi" path="res://player/player.tscn" id="2_0xm2m"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b2k2ysa4qy7js" path="res://assets/CLOUDS.png" id="14_w48qg"]
 [ext_resource type="Texture2D" uid="uid://noju6hvxfv07" path="res://assets/PLATFORM.png" id="16_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://b2ja7boe003hu" path="res://assets/PLAYER 1 SPRITE SHEET 64 BIT.png" id="17_82xsv"]
+[ext_resource type="AudioStream" uid="uid://bo6nnjeuot6w8" path="res://assets/music.mp3" id="20_82xsv"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kek77"]
 lifetime_randomness = 0.32
@@ -189,3 +190,8 @@ one_way_collision = true
 [node name="Sprite2D" type="Sprite2D" parent="Platform"]
 position = Vector2(2, 99)
 texture = ExtResource("16_2cqfq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_82xsv")
+autoplay = true
+parameters/looping = false
