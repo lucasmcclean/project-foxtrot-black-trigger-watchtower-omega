@@ -11,11 +11,9 @@ func enter() -> void:
 		player.animation.play("walk", -1, 10.0)
 
 
-
 func update(_delta: float):
 	if not player.animation.is_playing():
 		player.animation.play("walk", -1, 10.0)
-
 
 
 func physics_update(delta: float) -> void:
@@ -36,7 +34,8 @@ func physics_update(delta: float) -> void:
 		player.h_speed -= (player.h_speed - player.h_min_speed)/2
 		if(player.h_speed <= 100):
 			player.h_speed = player.h_min_speed	
-	player.velocity.x = clamp(player.velocity.x, -player.h_speed, player.h_speed)
+	
+	player.velocity.x = clamp(player.velocity.x, -player.h_speed / player.eeg_assistance, player.h_speed / player.eeg_assistance)
 	player.move_and_slide()
 	
 	if player.velocity.y > 0:

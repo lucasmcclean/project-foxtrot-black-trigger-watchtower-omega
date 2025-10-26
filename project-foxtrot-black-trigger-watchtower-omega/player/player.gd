@@ -9,7 +9,6 @@ var air_acceleration: float = 9900.0
 var air_friction: float = 24000.0
 var h_min_speed: float = 300.0
 var h_speed: float = 200.0
-var NORMAL_H_SPEED: float = 200.0
 var v_speed: float = 3000.0
 var jump_impulse: float = 650.0
 var jump_buffer_time: float = 0.2
@@ -18,6 +17,7 @@ var flash_impulse: float = 2000.0
 var flash_cooldown: float = 3.0
 var can_flash: bool = true
 var knockback_impulse: float = 300.0
+var eeg_assistance: float = 1.0
 
 var health: int = 20
 
@@ -111,9 +111,9 @@ func _process(delta: float) -> void:
 			found_EEG = true
 			break
 	if found_EEG:
-		h_speed = NORMAL_H_SPEED / 1.5
+		eeg_assistance = 1.5
 	else:
-		h_speed = NORMAL_H_SPEED
+		eeg_assistance = 1
 
 
 #TODO find most efficient way to ground check
