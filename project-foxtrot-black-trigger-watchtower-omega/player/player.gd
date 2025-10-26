@@ -39,6 +39,7 @@ var can_kick: bool = true
 func _ready() -> void:
 	if not facing_right:
 		sprite.flip_h = true
+		hurtbox.scale.x *= -1
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
 	state_machine.initialize()
@@ -51,11 +52,13 @@ func _physics_process(delta: float) -> void:
 	if input.move.x < 0 and facing_right:
 		facing_right = false
 		sprite.flip_h = true
+		hurtbox.scale.x *= -1
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
 	elif input.move.x > 0 and not facing_right:
 		facing_right = true
 		sprite.flip_h = false
+		hurtbox.scale.x *= -1
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
 		
@@ -96,7 +99,8 @@ func is_grounded() -> bool:
 
 
 func punch() -> void:
-	animation.play("punch")
+	animation.stop()
+	animation.play("punch", -1, 10.0)
 	var overlapping_areas = punch_hitbox.get_overlapping_areas()
 	for area in overlapping_areas:
 		if area is Hurtbox:
