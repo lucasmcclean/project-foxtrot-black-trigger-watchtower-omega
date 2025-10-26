@@ -41,6 +41,8 @@ var can_kick: bool = true
 
 @onready var hurtbox: Area2D = $Hurtbox
 
+@onready var particles: GPUParticles2D = $GlowParticle
+
 
 func _ready() -> void:
 	sprite.texture = sprite_sheet
@@ -153,6 +155,7 @@ func take_hit(damage: int, direction: int) -> void:
 	self.health -= damage
 	h_speed = 13000.0
 	self.velocity.x += knockback_impulse * direction
+	particles.emitting = true
 	state_machine.change_state(move_state)
 
 

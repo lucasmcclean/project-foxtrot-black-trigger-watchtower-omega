@@ -777,6 +777,17 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8t03j"]
 size = Vector2(141.42859, 331.42877)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8t03j"]
+lifetime_randomness = 0.32
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 130.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 98, 0)
+scale_min = 2.0
+scale_max = 3.0
+color = Color(0.79607844, 0, 0.07058824, 1)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("move_state")]
 scale = Vector2(0.7, 0.7)
 collision_layer = 2
@@ -870,6 +881,18 @@ debug_color = Color(0.88469225, 0.31448165, 0.2965871, 0.41960785)
 libraries = {
 &"": SubResource("AnimationLibrary_c35mf")
 }
+
+[node name="GlowParticle" type="GPUParticles2D" parent="."]
+z_index = 4096
+z_as_relative = false
+rotation = 0.7853982
+scale = Vector2(1.4285712, 1.4285712)
+emitting = false
+amount = 100
+lifetime = 0.12
+one_shot = true
+draw_order = 2
+process_material = SubResource("ParticleProcessMaterial_8t03j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("9_8t03j")
