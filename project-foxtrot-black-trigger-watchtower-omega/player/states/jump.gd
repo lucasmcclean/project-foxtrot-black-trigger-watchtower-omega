@@ -15,7 +15,11 @@ func enter() -> void:
 		just_jumped = true
 		player.velocity.y -= player.jump_impulse
 		just_jumped_timer()
-		
+
+
+func update(_delta: float):
+	if not player.animation.is_playing():
+		player.animation.play("jump")
 
 
 func physics_update(delta: float) -> void:

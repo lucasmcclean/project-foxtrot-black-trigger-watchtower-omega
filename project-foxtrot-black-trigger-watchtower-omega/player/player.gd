@@ -28,6 +28,8 @@ var can_kick: bool = true
 @onready var controller: Controller = $Controller
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var slash: Sprite2D = $Slash
+@onready var animation: AnimationPlayer = $AnimationPlayer
 
 @onready var punch_hitbox: Area2D = $PunchHitbox
 @onready var kick_hitbox: Area2D = $KickHitbox
@@ -38,6 +40,7 @@ var can_kick: bool = true
 func _ready() -> void:
 	if not facing_right:
 		sprite.flip_h = true
+		slash.flip_h = true
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
 	state_machine.initialize()
@@ -50,11 +53,13 @@ func _physics_process(delta: float) -> void:
 	if input.move.x < 0 and facing_right:
 		facing_right = false
 		sprite.flip_h = true
+		slash.flip_h = true
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
 	elif input.move.x > 0 and not facing_right:
 		facing_right = true
-		sprite.flip_h = false
+		sprite.flip_h = true
+		slash.flip_h = true
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
 		
@@ -81,11 +86,6 @@ func _physics_process(delta: float) -> void:
 		await get_tree().create_timer(0.3).timeout
 		set_collision_mask_value(1, true)
 
-	
-		
-		
-
-	
 
 func _process(delta: float) -> void:
 	state_machine.update(delta)
@@ -100,6 +100,7 @@ func is_grounded() -> bool:
 
 
 func punch() -> void:
+	animation.play("punch")
 	var overlapping_areas = punch_hitbox.get_overlapping_areas()
 	for area in overlapping_areas:
 		if area is Hurtbox:
@@ -110,9 +111,11 @@ func punch() -> void:
 				hit_player.take_hit(1, 1)
 	await get_tree().create_timer(0.5).timeout
 	can_punch = true
+	animation.stop()
 
 
 func kick() -> void:
+	animation.play("kick")
 	var overlapping_areas = kick_hitbox.get_overlapping_areas()
 	for area in overlapping_areas:
 		if area is Hurtbox:
@@ -123,6 +126,7 @@ func kick() -> void:
 				hit_player.take_hit(1, 1)
 	await get_tree().create_timer(0.5).timeout
 	can_kick = true
+	animation.stop()
 
 
 func take_hit(damage: int, direction: int) -> void:

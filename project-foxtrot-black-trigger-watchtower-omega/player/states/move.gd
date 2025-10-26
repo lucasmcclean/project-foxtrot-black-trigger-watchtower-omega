@@ -7,6 +7,14 @@ extends PlayerState
 
 func enter() -> void:
 	super()
+	if not player.animation.is_playing():
+		player.animation.play("walk")
+
+
+func update(_delta: float):
+	if not player.animation.is_playing():
+		player.animation.play("fall")
+
 
 func physics_update(delta: float) -> void:
 	if player.input.jump and player.is_grounded():

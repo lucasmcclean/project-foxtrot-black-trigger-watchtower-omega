@@ -6,8 +6,14 @@ extends PlayerState
 
 
 func enter() -> void:
-	player.get_node("Sprite2D").modulate = Color(0.7, 0.7, 1) # Light blue tint for falling
 	super()
+	if not player.animation.is_playing():
+		player.animation.play("fall")
+
+
+func update(_delta: float):
+	if not player.animation.is_playing():
+		player.animation.play("fall")
 
 
 func physics_update(delta: float) -> void:

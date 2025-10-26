@@ -10,6 +10,5 @@ func _ready() -> void:
 	assert(player != null, "The PlayerState state type must be used only in the player scene. It needs the owner to be a Player node.")
 
 
-func enter() -> void:
-	pass
-	#player.animator.play(animation_name)
+func exit() -> void:
+	player.animation.stop()
