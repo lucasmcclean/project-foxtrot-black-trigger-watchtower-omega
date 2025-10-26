@@ -1,8 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://bc6k2alunsfbg"]
+[gd_scene load_steps=23 format=3 uid="uid://bc6k2alunsfbg"]
 
 [ext_resource type="Script" uid="uid://dv8lu25mufguh" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://bdx3cerynkwbi" path="res://player/player.tscn" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://dee6fo7lyfsh2" path="res://parallax_2d.gd" id="2_vivmo"]
+[ext_resource type="Script" path="res://parallax_2d.gd" id="2_vivmo"]
 [ext_resource type="Texture2D" uid="uid://dgxsoeehpicp3" path="res://assets/SKY.png" id="2_ycdy4"]
 [ext_resource type="Script" uid="uid://bki1krgpg1do2" path="res://player/controller/local_controller.gd" id="3_1bvp3"]
 [ext_resource type="Resource" uid="uid://c71hxi52tpg2r" path="res://player/player_inputs/local_player_input.tres" id="3_7mycd"]
@@ -15,8 +15,10 @@
 [ext_resource type="FontFile" uid="uid://dwgip1taa2kja" path="res://assets/home-video-font/HomeVideo-BLG6G.ttf" id="10_yaehf"]
 [ext_resource type="Texture2D" uid="uid://5hewunhne21n" path="res://assets/FLOOR .png" id="11_dg77c"]
 [ext_resource type="Texture2D" uid="uid://cc1k6ngqfc64k" path="res://assets/SUN.png" id="13_w48qg"]
+[ext_resource type="Texture2D" uid="uid://vfa71vbs2vu1" path="res://assets/PLAYER 2 SPRITE SHEET 64.png" id="14_cegan"]
 [ext_resource type="Texture2D" uid="uid://b2k2ysa4qy7js" path="res://assets/CLOUDS.png" id="14_w48qg"]
 [ext_resource type="Texture2D" uid="uid://noju6hvxfv07" path="res://assets/PLATFORM.png" id="16_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://b2ja7boe003hu" path="res://assets/PLAYER 1 SPRITE SHEET 64 BIT.png" id="17_82xsv"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kek77"]
 lifetime_randomness = 0.32
@@ -162,6 +164,7 @@ shape = SubResource("RectangleShape2D_0xm2m")
 [node name="LocalPlayer" parent="." instance=ExtResource("2_0xm2m")]
 position = Vector2(202, 45.000004)
 input = ExtResource("3_7mycd")
+sprite_sheet = ExtResource("14_cegan")
 
 [node name="Controller" type="Node" parent="LocalPlayer"]
 script = ExtResource("3_1bvp3")
@@ -170,6 +173,7 @@ script = ExtResource("3_1bvp3")
 position = Vector2(-200, 45)
 facing_right = true
 input = ExtResource("5_272bh")
+sprite_sheet = ExtResource("17_82xsv")
 
 [node name="Controller" type="Node" parent="EEGPlayer"]
 script = ExtResource("4_lquwl")

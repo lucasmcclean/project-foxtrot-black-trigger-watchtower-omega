@@ -26,6 +26,7 @@ var can_kick: bool = true
 @export var move_state: State
 @export var facing_right: bool = false
 @export var input: PlayerInput
+@export var sprite_sheet: CompressedTexture2D
 
 @onready var controller: Controller = $Controller
 @onready var body: CollisionShape2D = $CollisionShape2D
@@ -40,6 +41,7 @@ var can_kick: bool = true
 
 
 func _ready() -> void:
+	sprite.texture = sprite_sheet
 	if not facing_right:
 		sprite.flip_h = true
 		body.scale.x *= -1
