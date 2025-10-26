@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bc6k2alunsfbg"]
+[gd_scene load_steps=21 format=3 uid="uid://bc6k2alunsfbg"]
 
 [ext_resource type="Script" uid="uid://dv8lu25mufguh" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://bdx3cerynkwbi" path="res://player/player.tscn" id="2_0xm2m"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b1q61ke6q21ei" path="res://assets/HPBARATLAS.tres" id="6_yaehf"]
 [ext_resource type="Script" uid="uid://dhy7ioayo4wtn" path="res://health_bar_eeg.gd" id="9_4c57u"]
 [ext_resource type="Texture2D" uid="uid://7rntmpnjtitn" path="res://assets/MOUNTAIN.png" id="10_efxa6"]
+[ext_resource type="FontFile" uid="uid://dwgip1taa2kja" path="res://assets/home-video-font/HomeVideo-BLG6G.ttf" id="10_yaehf"]
 [ext_resource type="Texture2D" uid="uid://5hewunhne21n" path="res://assets/FLOOR .png" id="11_dg77c"]
 [ext_resource type="Texture2D" uid="uid://cc1k6ngqfc64k" path="res://assets/SUN.png" id="13_w48qg"]
 [ext_resource type="Texture2D" uid="uid://b2k2ysa4qy7js" path="res://assets/CLOUDS.png" id="14_w48qg"]
@@ -85,7 +86,17 @@ value = 20.0
 texture_under = ExtResource("5_yaehf")
 texture_progress = ExtResource("6_yaehf")
 script = ExtResource("9_4c57u")
-player = NodePath("../../LocalPlayer")
+player = NodePath("../../EEGPlayer")
+
+[node name="Label" type="Label" parent="HUD/HealthBarLocal"]
+layout_mode = 0
+offset_left = 6.800064
+offset_top = -21.285727
+offset_right = 204.80006
+offset_bottom = 1.7142658
+theme_override_fonts/font = ExtResource("10_yaehf")
+theme_override_font_sizes/font_size = 22
+text = "EEG Player"
 
 [node name="GlowParticle" type="GPUParticles2D" parent="HUD/HealthBarLocal"]
 z_index = -1
@@ -111,7 +122,7 @@ value = 19.0
 texture_under = ExtResource("5_yaehf")
 texture_progress = ExtResource("6_yaehf")
 script = ExtResource("9_4c57u")
-player = NodePath("../../EEGPlayer")
+player = NodePath("../../LocalPlayer")
 
 [node name="GlowParticle" type="GPUParticles2D" parent="HUD/HealthBarEEG"]
 z_index = -1
@@ -124,6 +135,18 @@ lifetime = 0.12
 one_shot = true
 draw_order = 2
 process_material = SubResource("ParticleProcessMaterial_kek77")
+
+[node name="Label" type="Label" parent="HUD/HealthBarEEG"]
+layout_mode = 0
+offset_left = 168.57141
+offset_top = 55.71427
+offset_right = 366.5714
+offset_bottom = 100.71428
+rotation = 3.1415927
+theme_override_fonts/font = ExtResource("10_yaehf")
+theme_override_font_sizes/font_size = 22
+text = "Local Player
+"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 129)
