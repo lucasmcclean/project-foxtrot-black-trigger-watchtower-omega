@@ -16,7 +16,7 @@ var jump_buffered: bool = false
 var flash_impulse: float = 2000.0
 var flash_cooldown: float = 3.0
 var can_flash: bool = true
-var knockback_impulse: float = 500.0
+var knockback_impulse: float = 300.0
 
 var health: int = 20
 
