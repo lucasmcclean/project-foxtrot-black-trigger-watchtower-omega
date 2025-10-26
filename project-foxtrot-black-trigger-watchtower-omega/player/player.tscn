@@ -895,6 +895,7 @@ libraries = {
 [node name="DirtParticle" type="GPUParticles2D" parent="."]
 z_index = 4096
 z_as_relative = false
+position = Vector2(0, 27.142857)
 rotation = 1.5707964
 scale = Vector2(2.0408154, 2.0408154)
 emitting = false

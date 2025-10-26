@@ -42,6 +42,7 @@ var can_kick: bool = true
 @onready var hurtbox: Area2D = $Hurtbox
 
 @onready var particles: GPUParticles2D = $GlowParticle
+@onready var dirt_particles: GPUParticles2D = $DirtParticle
 
 
 func _ready() -> void:
