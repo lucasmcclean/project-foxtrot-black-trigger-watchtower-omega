@@ -65,7 +65,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Slash:position")
+tracks/3/path = NodePath("PunchHitbox/Slash:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -77,7 +77,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Slash:visible")
+tracks/4/path = NodePath("PunchHitbox/Slash:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -216,7 +216,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Slash:position")
+tracks/2/path = NodePath("PunchHitbox/Slash:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -228,7 +228,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Slash:visible")
+tracks/3/path = NodePath("PunchHitbox/Slash:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -358,6 +358,11 @@ scale = Vector2(0.9999998, 0.9999998)
 shape = SubResource("RectangleShape2D_boad6")
 debug_color = Color(7.70092e-07, 0.5665836, 0.86229104, 0.41960785)
 
+[node name="Slash" type="Sprite2D" parent="PunchHitbox"]
+position = Vector2(65.00009, 9.999999)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("10_2ieo8")
+
 [node name="KickHitbox" type="Area2D" parent="."]
 script = ExtResource("8_rgyib")
 type = 1
@@ -385,9 +390,5 @@ libraries = {
 texture = ExtResource("9_8t03j")
 hframes = 4
 vframes = 6
-
-[node name="Slash" type="Sprite2D" parent="."]
-position = Vector2(65.00009, 9.999999)
-texture = ExtResource("10_2ieo8")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

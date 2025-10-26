@@ -28,7 +28,6 @@ var can_kick: bool = true
 @onready var controller: Controller = $Controller
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var slash: Sprite2D = $Slash
 @onready var animation: AnimationPlayer = $AnimationPlayer
 
 @onready var punch_hitbox: Area2D = $PunchHitbox
@@ -40,7 +39,6 @@ var can_kick: bool = true
 func _ready() -> void:
 	if not facing_right:
 		sprite.flip_h = true
-		slash.flip_h = true
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
 	state_machine.initialize()
@@ -53,13 +51,11 @@ func _physics_process(delta: float) -> void:
 	if input.move.x < 0 and facing_right:
 		facing_right = false
 		sprite.flip_h = true
-		slash.flip_h = true
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
 	elif input.move.x > 0 and not facing_right:
 		facing_right = true
-		sprite.flip_h = true
-		slash.flip_h = true
+		sprite.flip_h = false
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
 		
