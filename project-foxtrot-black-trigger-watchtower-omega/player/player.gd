@@ -107,7 +107,7 @@ func _process(delta: float) -> void:
 	state_machine.update(delta)
 	var found_EEG = false
 	for area in eeg_scanner_hitbox.get_overlapping_areas():
-		if area.get_parent().name == "EEGPlayer":
+		if area.get_parent().name == "LocalPlayer" and name != "LocalPlayer":
 			found_EEG = true
 			break
 	if found_EEG:
