@@ -33,7 +33,6 @@ func physics_update(delta: float) -> void:
 		get_tree().create_timer(player.jump_buffer_time).timeout.connect(func(): player.jump_buffered = false)
 	
 	if player.is_grounded():
-		player.dirt_particles.emitting = true
 		if player.jump_buffered:
 			state_machine.change_state(jump_state)
 		elif !is_zero_approx(player.velocity.x):
