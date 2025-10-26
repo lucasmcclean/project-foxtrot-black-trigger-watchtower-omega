@@ -17,4 +17,3 @@ func _process(delta: float) -> void:
 	value = player.health
 
 	last_health = player.health
-	print(value)

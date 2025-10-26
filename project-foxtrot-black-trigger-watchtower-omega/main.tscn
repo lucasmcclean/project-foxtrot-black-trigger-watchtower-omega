@@ -64,6 +64,7 @@ script = ExtResource("9_4c57u")
 player = NodePath("../../LocalPlayer")
 
 [node name="GlowParticle" type="GPUParticles2D" parent="HUD/HealthBarLocal"]
+z_index = -1
 position = Vector2(244.0004, 17.142426)
 rotation = -2.0722551
 scale = Vector2(1.4285713, 1.4285713)
@@ -71,6 +72,7 @@ emitting = false
 amount = 20
 lifetime = 0.12
 one_shot = true
+draw_order = 2
 process_material = SubResource("ParticleProcessMaterial_kek77")
 
 [node name="HealthBarEEG" type="TextureProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
@@ -88,6 +90,7 @@ script = ExtResource("9_4c57u")
 player = NodePath("../../EEGPlayer")
 
 [node name="GlowParticle" type="GPUParticles2D" parent="HUD/HealthBarEEG"]
+z_index = -1
 position = Vector2(260, 21.428558)
 rotation = -1.0029176
 scale = Vector2(2.040816, 2.040816)
@@ -95,6 +98,7 @@ emitting = false
 amount = 20
 lifetime = 0.12
 one_shot = true
+draw_order = 2
 process_material = SubResource("ParticleProcessMaterial_kek77")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
