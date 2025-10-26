@@ -63,15 +63,15 @@ func _physics_process(delta: float) -> void:
 		hurtbox.scale.x *= -1
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
-		
-	if input.punch and can_punch :
+
+	if input.punch and can_punch:
 		can_punch = false
 		punch()
-		
+
 	if input.kick and can_kick:
 		can_kick = false
 		kick()
-	
+
 	if input.flash_step and can_flash and is_grounded():
 		# Courtesy of Ishfaq
 		hurtbox.monitorable = false
@@ -80,7 +80,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		hurtbox.monitorable = true
 		hurtbox.monitoring = true
-	
+
 	if input.crouch and is_grounded():
 		# Temporarily disable one-way collision
 		set_collision_mask_value(1, false)
@@ -138,14 +138,15 @@ func take_hit(damage: int, direction: int) -> void:
 
 
 func handle_flash_step() -> void:
-	if(input.move.x == 0):
-		return
 	h_speed = 3000.0
 	can_flash = false
-	if(input.move.x > 0):
+	if input.move.x > 0:
+		velocity.x -= flash_impulse
+	elif input.move.x < 0:
+		velocity.x += flash_impulse
+	elif facing_right:
 		velocity.x -= flash_impulse
 	else:
-		velocity.x +=  flash_impulse
 		velocity.x += flash_impulse
 	state_machine.change_state(move_state)
 	await get_tree().create_timer(flash_cooldown).timeout
