@@ -13,7 +13,7 @@ func enter() -> void:
 
 func update(_delta: float):
 	if not player.animation.is_playing():
-		player.animation.play("fall")
+		player.animation.play("walk")
 
 
 func physics_update(delta: float) -> void:

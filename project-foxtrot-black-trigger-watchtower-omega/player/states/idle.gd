@@ -5,7 +5,6 @@ extends PlayerState
 @export var move_state: State
 
 
-
 func enter() -> void:
 	super()
 	player.velocity.x = 0

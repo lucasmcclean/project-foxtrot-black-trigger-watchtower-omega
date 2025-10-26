@@ -8,13 +8,12 @@ var just_jumped: bool = false
 
 
 func enter() -> void:
-	player.get_node("Sprite2D").modulate = Color(0.0, 0.848, 0.779, 1.0) # Light blue tint for falling
-
 	if(!just_jumped):
 		super()
 		just_jumped = true
 		player.velocity.y -= player.jump_impulse
 		just_jumped_timer()
+		player.animation.play("jump")
 
 
 func update(_delta: float):
