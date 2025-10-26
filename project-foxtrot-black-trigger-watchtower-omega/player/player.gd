@@ -107,6 +107,8 @@ func punch() -> void:
 	for area in overlapping_areas:
 		if area is Hurtbox:
 			var hit_player = area.get_parent()
+			if hit_player == self:
+				continue
 			if hit_player.position.x < self.position.x:
 				hit_player.take_hit(1, -1)
 			else:
@@ -123,6 +125,8 @@ func kick() -> void:
 	for area in overlapping_areas:
 		if area is Hurtbox:
 			var hit_player = area.get_parent()
+			if hit_player == self:
+				continue
 			if hit_player.position.x < self.position.x:
 				hit_player.take_hit(1, -1)
 			else:
