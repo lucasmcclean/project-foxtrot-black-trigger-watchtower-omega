@@ -51,6 +51,12 @@ texture = ExtResource("2_ycdy4")
 region_enabled = true
 region_rect = Rect2(0, 0, 641, 361.75)
 
+[node name="Sun" type="Sprite2D" parent="Parallax2D"]
+texture_repeat = 2
+position = Vector2(-271, 15)
+texture = ExtResource("13_w48qg")
+region_rect = Rect2(0, 0, 640, 360)
+
 [node name="Clouds" type="Sprite2D" parent="Parallax2D"]
 texture_repeat = 2
 position = Vector2(1, -52)
@@ -63,13 +69,6 @@ modulate = Color(0.73, 0.73, 0.73, 1)
 texture_repeat = 2
 position = Vector2(1, -54)
 texture = ExtResource("10_efxa6")
-region_enabled = true
-region_rect = Rect2(0, 0, 640, 360)
-
-[node name="Sun" type="Sprite2D" parent="Parallax2D"]
-texture_repeat = 2
-position = Vector2(1, -102)
-texture = ExtResource("13_w48qg")
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 360)
 
