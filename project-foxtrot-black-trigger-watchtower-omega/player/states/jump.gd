@@ -24,12 +24,10 @@ func update(_delta: float):
 
 func physics_update(delta: float) -> void:
 	player.velocity.y += player.jump_gravity*delta
-	if (player.input.move.x != 0) and (player.velocity.x*player.input.move.x > 0):
-		player.velocity.x += player.input.move.x*player.air_acceleration*delta
-	elif player.input.move.x != 0:
-		player.velocity.x += player.input.move.x*player.air_friction*delta
+	if player.input.move.x != 0:
+		player.velocity.x = move_toward(player.velocity.x, player.input.move.x * player.h_speed, player.air_acceleration * delta)
 	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, player.air_friction*delta)
+		player.velocity.x = move_toward(player.velocity.x, 0, player.air_friction * delta)
 	player.velocity.x = clamp(player.velocity.x, -player.h_speed, player.h_speed)
 	player.velocity.y = clamp(player.velocity.y, -player.v_speed, player.v_speed)
 	player.move_and_slide()
