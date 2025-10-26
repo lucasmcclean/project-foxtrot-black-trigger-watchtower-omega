@@ -32,6 +32,9 @@ SLEEP_DELAY = 0
 WEBSOCKET_HOST = "0.0.0.0"
 WEBSOCKET_PORT = 8765
 
+# -------------------------
+# --- FEATURE EXTRACTION ---
+# -------------------------
 class FeatureExtractor:
     def __init__(self, sfreq=256):
         self.sfreq = sfreq
@@ -49,6 +52,8 @@ class FeatureExtractor:
             freqs, psd = signal.welch(d, fs=self.sfreq, nperseg=min(64, n_samples))
             for band in [(1, 4), (4, 8), (8, 13), (13, 30), (30, 50)]:
                 features.append(float(self._band_power(freqs, psd, *band)))
+            # last three appended: delta, theta, alpha, beta, gamma -> alpha index = -3
+            # safe indexing assuming bands appended in fixed order
             alpha = features[-3]
             beta = features[-2]
             theta = features[-4]
@@ -60,6 +65,9 @@ class FeatureExtractor:
         idx = np.logical_and(freqs >= fmin, freqs <= fmax)
         return np.trapz(psd[idx], freqs[idx]) if np.any(idx) else 0.0
 
+# -------------------------
+# --- LSL SETUP HELPERS ---
+# -------------------------
 def setup_lsl_inlet(stream_type, timeout=3.0, buf=WINDOW_LENGTH):
     print(f"Looking for a {stream_type} stream...")
     streams = resolve_byprop("type", stream_type, 1, timeout)
@@ -70,6 +78,7 @@ def setup_lsl_inlet(stream_type, timeout=3.0, buf=WINDOW_LENGTH):
     return inlet
 
 def calibrate_gyro_blocking(inlet, duration=GYRO_CALIB_DURATION):
+    """Blocking calibration used in executor."""
     print(f"Calibrating gyro... keep head still for {duration:.1f}s")
     start = time.time()
     collected = []
@@ -84,6 +93,9 @@ def calibrate_gyro_blocking(inlet, duration=GYRO_CALIB_DURATION):
     print(f"Calibration complete. Bias = {bias}")
     return bias
 
+# -------------------------
+# --- WEBSOCKET BROADCAST ---
+# -------------------------
 class Broadcaster:
     def __init__(self):
         self.connections = set()
@@ -98,10 +110,12 @@ class Broadcaster:
             self.connections.discard(websocket)
 
     async def broadcast(self, message_json):
+        """Send message_json (string) to all connected websockets; remove dead ones."""
         async with self._lock:
             conns = list(self.connections)
         if not conns:
             return
+        # send concurrently
         await asyncio.gather(*[self._safe_send(ws, message_json) for ws in conns])
 
     async def _safe_send(self, ws, msg):
@@ -114,6 +128,9 @@ class Broadcaster:
 
 broadcaster = Broadcaster()
 
+# -------------------------
+# --- WEBSOCKET HANDLER ---
+# -------------------------
 async def ws_handler(websocket):
     await broadcaster.register(websocket)
     try:
@@ -124,6 +141,9 @@ async def ws_handler(websocket):
     finally:
         await broadcaster.unregister(websocket)
 
+# -------------------------
+# --- PROCESSING TASK (async) ---
+# -------------------------
 async def processing_loop(loop):
     # Load model (blocking) in executor
     try:
@@ -144,6 +164,7 @@ async def processing_loop(loop):
     # EEG info
     eeg_info = eeg_inlet.info()
     sfreq = int(eeg_info.nominal_srate())
+    n_channels = eeg_info.channel_count()
     extractor = FeatureExtractor(sfreq=sfreq)
 
     eeg_window_buffer = deque(maxlen=SAMPLES_PER_WINDOW)
