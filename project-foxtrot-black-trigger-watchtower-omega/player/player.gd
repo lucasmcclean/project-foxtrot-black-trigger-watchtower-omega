@@ -61,6 +61,7 @@ func _ready() -> void:
 		kick_hitbox.scale.x *= -1
 		eeg_scanner_hitbox.scale.x *= -1
 	state_machine.initialize()
+	punch()
 
 
 func _physics_process(delta: float) -> void:
@@ -170,6 +171,7 @@ func take_hit(damage: int, direction: int) -> void:
 
 
 func handle_flash_step() -> void:
+	print("flashing")
 	dash_sound.play()
 	h_speed = 3000.0
 	can_flash = false
