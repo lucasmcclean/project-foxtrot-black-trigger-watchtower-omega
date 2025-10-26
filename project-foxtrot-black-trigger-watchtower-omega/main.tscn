@@ -1,8 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://bc6k2alunsfbg"]
+[gd_scene load_steps=25 format=3 uid="uid://bc6k2alunsfbg"]
 
 [ext_resource type="Script" uid="uid://dv8lu25mufguh" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://bdx3cerynkwbi" path="res://player/player.tscn" id="2_0xm2m"]
-[ext_resource type="Script" path="res://parallax_2d.gd" id="2_vivmo"]
+[ext_resource type="Script" uid="uid://dee6fo7lyfsh2" path="res://parallax_2d.gd" id="2_vivmo"]
 [ext_resource type="Texture2D" uid="uid://dgxsoeehpicp3" path="res://assets/SKY.png" id="2_ycdy4"]
 [ext_resource type="Script" uid="uid://bki1krgpg1do2" path="res://player/controller/local_controller.gd" id="3_1bvp3"]
 [ext_resource type="Resource" uid="uid://c71hxi52tpg2r" path="res://player/player_inputs/local_player_input.tres" id="3_7mycd"]
@@ -37,6 +37,9 @@ size = Vector2(1153, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
 size = Vector2(111, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82xsv"]
+size = Vector2(20, 244.5)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_272bh")
@@ -195,3 +198,16 @@ texture = ExtResource("16_2cqfq")
 stream = ExtResource("20_82xsv")
 autoplay = true
 parameters/looping = false
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(329, -3.75)
+shape = SubResource("RectangleShape2D_82xsv")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(-659, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(329, -3.75)
+shape = SubResource("RectangleShape2D_82xsv")
