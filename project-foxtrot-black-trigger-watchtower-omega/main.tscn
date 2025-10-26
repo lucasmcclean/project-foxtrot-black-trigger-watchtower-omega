@@ -1,14 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://bc6k2alunsfbg"]
+[gd_scene load_steps=18 format=3 uid="uid://bc6k2alunsfbg"]
 
 [ext_resource type="Script" uid="uid://dv8lu25mufguh" path="res://main.gd" id="1_272bh"]
-[ext_resource type="Texture2D" uid="uid://nbtt4xedu5wp" path="res://icon.svg" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bdx3cerynkwbi" path="res://player/player.tscn" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://dgxsoeehpicp3" path="res://assets/SKY.png" id="2_ycdy4"]
 [ext_resource type="Script" uid="uid://bki1krgpg1do2" path="res://player/controller/local_controller.gd" id="3_1bvp3"]
 [ext_resource type="Resource" uid="uid://c71hxi52tpg2r" path="res://player/player_inputs/local_player_input.tres" id="3_7mycd"]
 [ext_resource type="Script" uid="uid://cbecrk3miq2is" path="res://player/controller/eeg_controller.gd" id="4_lquwl"]
 [ext_resource type="Resource" uid="uid://611yuv78cv3m" path="res://player/player_inputs/eeg_player_input.tres" id="5_272bh"]
 [ext_resource type="Script" uid="uid://dyknlw5lm13aj" path="res://health_bar_local.gd" id="8_kek77"]
 [ext_resource type="Script" uid="uid://dhy7ioayo4wtn" path="res://health_bar_eeg.gd" id="9_4c57u"]
+[ext_resource type="Texture2D" uid="uid://7rntmpnjtitn" path="res://assets/MOUNTAIN.png" id="10_efxa6"]
+[ext_resource type="Texture2D" uid="uid://5hewunhne21n" path="res://assets/FLOOR .png" id="11_dg77c"]
+[ext_resource type="Texture2D" uid="uid://cc1k6ngqfc64k" path="res://assets/SUN.png" id="13_w48qg"]
+[ext_resource type="Texture2D" uid="uid://b2k2ysa4qy7js" path="res://assets/CLOUDS.png" id="14_w48qg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efxa6"]
 bg_color = Color(0.87365526, 0.17387769, 0.27908936, 1)
@@ -33,22 +37,37 @@ size = Vector2(111, 20)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_272bh")
 
+[node name="Sky" type="Sprite2D" parent="."]
+position = Vector2(-1, -52)
+texture = ExtResource("2_ycdy4")
+
+[node name="Clouds" type="Sprite2D" parent="."]
+position = Vector2(-42, -33)
+texture = ExtResource("14_w48qg")
+
+[node name="Mountain" type="Sprite2D" parent="."]
+position = Vector2(-3, -53)
+texture = ExtResource("10_efxa6")
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="HealthBarLocal" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
-offset_left = 29.0
-offset_top = 18.0
-offset_right = 214.0
-offset_bottom = 50.0
+anchors_preset = -1
+anchor_bottom = -0.041666668
+offset_left = 61.0
+offset_top = 29.0
+offset_right = 246.0
+offset_bottom = 61.0
 theme_override_colors/font_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
 value = 100.0
 show_percentage = false
 script = ExtResource("8_kek77")
 player = NodePath("../../LocalPlayer")
+metadata/_edit_use_anchors_ = true
 
 [node name="GlowParticle" type="GPUParticles2D" parent="HUD/HealthBarLocal"]
-position = Vector2(162, 14)
+position = Vector2(174, 9)
 emitting = false
 amount = 20
 lifetime = 0.3
@@ -56,10 +75,13 @@ one_shot = true
 process_material = SubResource("ParticleProcessMaterial_kek77")
 
 [node name="HealthBarEEG" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
-offset_left = 612.0
-offset_top = 53.0
-offset_right = 797.0
-offset_bottom = 85.0
+anchors_preset = -1
+anchor_top = -0.038635932
+anchor_bottom = -0.077271864
+offset_left = 561.0
+offset_top = 61.908936
+offset_right = 746.0
+offset_bottom = 93.908936
 rotation = 3.1415927
 theme_override_colors/font_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
@@ -67,9 +89,10 @@ value = 100.0
 show_percentage = false
 script = ExtResource("9_4c57u")
 player = NodePath("../../EEGPlayer")
+metadata/_edit_use_anchors_ = true
 
 [node name="GlowParticle" type="GPUParticles2D" parent="HUD/HealthBarEEG"]
-position = Vector2(165, 15.999987)
+position = Vector2(175, 7.9999695)
 rotation = 1.0693375
 emitting = false
 amount = 20
@@ -80,17 +103,17 @@ process_material = SubResource("ParticleProcessMaterial_kek77")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 129)
 
+[node name="Floor" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(3, -78)
+texture = ExtResource("11_dg77c")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_0xm2m")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(9.0078125, 0.16406259)
-texture = ExtResource("1_ig7tw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="LocalPlayer" parent="." instance=ExtResource("2_0xm2m")]
-position = Vector2(200, 45)
+position = Vector2(202, 45.000004)
 input = ExtResource("3_7mycd")
 
 [node name="Controller" type="Node" parent="LocalPlayer"]
@@ -124,3 +147,7 @@ one_way_collision = true
 position = Vector2(150, -106)
 shape = SubResource("RectangleShape2D_272bh")
 one_way_collision = true
+
+[node name="Sun" type="Sprite2D" parent="."]
+position = Vector2(20, -60)
+texture = ExtResource("13_w48qg")
