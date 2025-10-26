@@ -25,10 +25,10 @@ script = ExtResource("1_272bh")
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="HealthBarLocal" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
-offset_left = -297.0
-offset_top = -161.0
-offset_right = -112.0
-offset_bottom = -129.0
+offset_left = 29.0
+offset_top = 18.0
+offset_right = 214.0
+offset_bottom = 50.0
 theme_override_colors/font_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
 value = 100.0
@@ -37,10 +37,10 @@ script = ExtResource("8_kek77")
 player = NodePath("../../LocalPlayer")
 
 [node name="HealthBarEEG" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
-offset_left = 114.0
-offset_top = -160.0
-offset_right = 299.0
-offset_bottom = -128.0
+offset_left = 440.0
+offset_top = 19.0
+offset_right = 625.0
+offset_bottom = 51.0
 theme_override_colors/font_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
 theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
 value = 100.0
