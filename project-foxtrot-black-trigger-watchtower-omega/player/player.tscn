@@ -388,10 +388,10 @@ tracks/5/path = NodePath("PunchHitbox/Slash:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(2.02, 2.63, 2.99, 3.53),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2.02, 2.63, 2.99, 3.53),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 0, 1, 2, 3]
 }
 tracks/6/type = "value"
 tracks/6/imported = false

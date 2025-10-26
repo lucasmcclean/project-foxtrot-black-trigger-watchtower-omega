@@ -11,9 +11,11 @@ func enter() -> void:
 		player.animation.play("walk", -1, 10.0)
 
 
+
 func update(_delta: float):
 	if not player.animation.is_playing():
 		player.animation.play("walk", -1, 10.0)
+
 
 
 func physics_update(delta: float) -> void:
