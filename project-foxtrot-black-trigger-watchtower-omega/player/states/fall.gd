@@ -28,7 +28,14 @@ func physics_update(delta: float) -> void:
 	player.velocity.y = clamp(player.velocity.y, -player.v_speed, player.v_speed)
 	player.move_and_slide()
 	
-	if player.is_grounded() and !is_zero_approx(player.velocity.x):
-		state_machine.change_state(move_state)
-	elif player.is_grounded():
-		state_machine.change_state(idle_state)
+	if player.input.jump:
+		player.jump_buffered = true
+		get_tree().create_timer(player.jump_buffer_time).timeout.connect(func(): player.jump_buffered = false)
+	
+	if player.is_grounded():
+		if player.jump_buffered:
+			state_machine.change_state(jump_state)
+		elif !is_zero_approx(player.velocity.x):
+			state_machine.change_state(move_state)
+		else:
+			state_machine.change_state(idle_state)
