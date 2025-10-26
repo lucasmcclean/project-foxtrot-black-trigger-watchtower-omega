@@ -46,6 +46,7 @@ position = Vector2(-42, -33)
 texture = ExtResource("14_w48qg")
 
 [node name="Mountain" type="Sprite2D" parent="."]
+modulate = Color(0.73, 0.73, 0.73, 1)
 position = Vector2(-3, -53)
 texture = ExtResource("10_efxa6")
 
