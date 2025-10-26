@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bc6k2alunsfbg"]
+[gd_scene load_steps=13 format=3 uid="uid://bc6k2alunsfbg"]
 
 [ext_resource type="Script" uid="uid://dv8lu25mufguh" path="res://main.gd" id="1_272bh"]
 [ext_resource type="Texture2D" uid="uid://nbtt4xedu5wp" path="res://icon.svg" id="1_ig7tw"]
@@ -7,6 +7,11 @@
 [ext_resource type="Resource" uid="uid://c71hxi52tpg2r" path="res://player/player_inputs/local_player_input.tres" id="3_7mycd"]
 [ext_resource type="Script" uid="uid://cbecrk3miq2is" path="res://player/controller/eeg_controller.gd" id="4_lquwl"]
 [ext_resource type="Resource" uid="uid://611yuv78cv3m" path="res://player/player_inputs/eeg_player_input.tres" id="5_272bh"]
+[ext_resource type="Script" uid="uid://dyknlw5lm13aj" path="res://health_bar_local.gd" id="8_kek77"]
+[ext_resource type="Script" uid="uid://dhy7ioayo4wtn" path="res://health_bar_eeg.gd" id="9_4c57u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efxa6"]
+bg_color = Color(0.87365526, 0.17387769, 0.27908936, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(1153, 20)
@@ -16,6 +21,32 @@ size = Vector2(111, 20)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_272bh")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HealthBarLocal" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
+offset_left = -297.0
+offset_top = -161.0
+offset_right = -112.0
+offset_bottom = -129.0
+theme_override_colors/font_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
+value = 100.0
+show_percentage = false
+script = ExtResource("8_kek77")
+player = NodePath("../../LocalPlayer")
+
+[node name="HealthBarEEG" type="ProgressBar" parent="HUD" node_paths=PackedStringArray("player")]
+offset_left = 114.0
+offset_top = -160.0
+offset_right = 299.0
+offset_bottom = -128.0
+theme_override_colors/font_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+theme_override_styles/fill = SubResource("StyleBoxFlat_efxa6")
+value = 100.0
+show_percentage = false
+script = ExtResource("9_4c57u")
+player = NodePath("../../EEGPlayer")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 129)
