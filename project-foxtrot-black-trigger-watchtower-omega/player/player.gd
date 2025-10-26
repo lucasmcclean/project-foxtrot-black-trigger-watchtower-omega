@@ -9,6 +9,7 @@ var air_acceleration: float = 9900.0
 var air_friction: float = 24000.0
 var h_min_speed: float = 300.0
 var h_speed: float = 200.0
+var NORMAL_H_SPEED: float = 200.0
 var v_speed: float = 3000.0
 var jump_impulse: float = 650.0
 var jump_buffer_time: float = 0.2
@@ -36,6 +37,7 @@ var can_kick: bool = true
 
 @onready var punch_hitbox: Area2D = $PunchHitbox
 @onready var kick_hitbox: Area2D = $KickHitbox
+@onready var eeg_scanner_hitbox: Area2D = $EEGScan
 
 @onready var hurtbox: Area2D = $Hurtbox
 
@@ -48,6 +50,7 @@ func _ready() -> void:
 		hurtbox.scale.x *= -1
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
+		eeg_scanner_hitbox.scale.x *= -1
 	state_machine.initialize()
 
 
@@ -62,6 +65,7 @@ func _physics_process(delta: float) -> void:
 		hurtbox.scale.x *= -1
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
+		eeg_scanner_hitbox.scale.x *= -1
 	elif input.move.x > 0 and not facing_right:
 		facing_right = true
 		sprite.flip_h = false
@@ -69,6 +73,7 @@ func _physics_process(delta: float) -> void:
 		hurtbox.scale.x *= -1
 		punch_hitbox.scale.x *= -1
 		kick_hitbox.scale.x *= -1
+		eeg_scanner_hitbox.scale.x *= -1
 
 	if input.punch and can_punch:
 		can_punch = false
@@ -90,6 +95,15 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	state_machine.update(delta)
+	var found_EEG = false
+	for area in eeg_scanner_hitbox.get_overlapping_areas():
+		if area.get_parent().name == "EEGPlayer":
+			found_EEG = true
+			break
+	if found_EEG:
+		h_speed = NORMAL_H_SPEED / 1.5
+	else:
+		h_speed = NORMAL_H_SPEED
 
 
 #TODO find most efficient way to ground check
@@ -98,7 +112,6 @@ func is_grounded() -> bool:
 		if cast.is_colliding():
 			return true
 	return false
-
 
 func punch() -> void:
 	animation.play("punch", -1, 10)
