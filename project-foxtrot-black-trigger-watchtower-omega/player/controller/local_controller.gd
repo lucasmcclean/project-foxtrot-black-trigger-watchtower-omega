@@ -17,4 +17,3 @@ func sample_input() -> void:
 	player.input.kick = Input.is_action_just_pressed("kick")
 	player.input.flash_step = Input.is_action_just_pressed("flash_step")
 	player.input.crouch = Input.is_action_just_pressed("crouch")
-	

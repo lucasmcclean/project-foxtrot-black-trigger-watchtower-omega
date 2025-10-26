@@ -12,8 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://u7iyxdd87o2e" path="res://assets/SLASH SPRITE.png" id="10_2ieo8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
-radius = 28.571426
-height = 57.142853
+radius = 17.142857
+height = 54.285713
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boad6"]
 size = Vector2(80, 29.285713)
@@ -111,6 +111,49 @@ tracks/6/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_32hag"]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+
+[sub_resource type="Animation" id="Animation_e7oew"]
+resource_name = "idle"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [20, 21, 22]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hurtbox/Hurter:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-4.2857156, 4.999987), Vector2(1.0217937e-06, 3.5714045), Vector2(4.2857113, 4.9999723)]
+}
+
 [sub_resource type="Animation" id="Animation_yllr7"]
 resource_name = "jump"
 length = 3.0
@@ -125,6 +168,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_wodsf"]
+resource_name = "kick"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15]
 }
 
 [sub_resource type="Animation" id="Animation_kb6p2"]
@@ -203,37 +262,6 @@ tracks/5/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_wodsf"]
-resource_name = "kick"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [12, 13, 14, 15]
-}
-
-[sub_resource type="Animation" id="Animation_32hag"]
-resource_name = "fall"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [16]
-}
-
 [sub_resource type="Animation" id="Animation_tqiix"]
 resource_name = "walk"
 length = 3.0
@@ -262,34 +290,6 @@ tracks/1/keys = {
 "values": [Vector2(-2.1428566, 3.5714223), Vector2(-2.1428566, 1.4285651), Vector2(-2.1428566, 3.57142)]
 }
 
-[sub_resource type="Animation" id="Animation_e7oew"]
-resource_name = "idle"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [20, 21, 22]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Hurtbox/Hurter:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(-4.2857156, 4.999987), Vector2(1.0217937e-06, 3.5714045), Vector2(4.2857113, 4.9999723)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c35mf"]
 _data = {
 &"RESET": SubResource("Animation_ebec5"),
@@ -308,6 +308,7 @@ script = ExtResource("1_rkbax")
 move_state = NodePath("StateMachine/Move")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.8571424, 4.285714)
 shape = SubResource("CapsuleShape2D_onrkg")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
@@ -341,11 +342,11 @@ idle_state = NodePath("../Idle")
 [node name="GroundCasts" type="Node2D" parent="."]
 
 [node name="Left" type="RayCast2D" parent="GroundCasts"]
-position = Vector2(-30, 60.275)
-target_position = Vector2(-1, 9.725)
+position = Vector2(-15.714289, 31.429)
+target_position = Vector2(0, 10)
 
 [node name="Right" type="RayCast2D" parent="GroundCasts"]
-position = Vector2(30, 60.275)
+position = Vector2(15.714289, 31.428574)
 target_position = Vector2(0, 9.724995)
 
 [node name="PunchHitbox" type="Area2D" parent="."]
