@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bc6k2alunsfbg"]
+[gd_scene load_steps=19 format=3 uid="uid://bc6k2alunsfbg"]
 
 [ext_resource type="Script" uid="uid://dv8lu25mufguh" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://bdx3cerynkwbi" path="res://player/player.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://dee6fo7lyfsh2" path="res://parallax_2d.gd" id="2_vivmo"]
 [ext_resource type="Texture2D" uid="uid://dgxsoeehpicp3" path="res://assets/SKY.png" id="2_ycdy4"]
 [ext_resource type="Script" uid="uid://bki1krgpg1do2" path="res://player/controller/local_controller.gd" id="3_1bvp3"]
 [ext_resource type="Resource" uid="uid://c71hxi52tpg2r" path="res://player/player_inputs/local_player_input.tres" id="3_7mycd"]
@@ -35,20 +36,51 @@ size = Vector2(111, 20)
 [node name="Main" type="Node2D"]
 script = ExtResource("1_272bh")
 
-[node name="Sky" type="Sprite2D" parent="."]
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_offset = Vector2(-321, -123)
+repeat_times = 4
+follow_viewport = false
+script = ExtResource("2_vivmo")
+
+[node name="Sky" type="Sprite2D" parent="Parallax2D"]
+texture_repeat = 2
 position = Vector2(-1, -52)
 texture = ExtResource("2_ycdy4")
+region_enabled = true
+region_rect = Rect2(0, 0, 641, 361.75)
 
+<<<<<<< HEAD
 [node name="Clouds" type="Sprite2D" parent="."]
 position = Vector2(-41.999996, -33)
 scale = Vector2(0.99999994, 0.99999994)
+=======
+[node name="Clouds" type="Sprite2D" parent="Parallax2D"]
+texture_repeat = 2
+position = Vector2(1, -52)
+>>>>>>> 0040dd6 (Almost done with parallax)
 texture = ExtResource("14_w48qg")
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 358.75)
 
-[node name="Mountain" type="Sprite2D" parent="."]
+[node name="Mountain" type="Sprite2D" parent="Parallax2D"]
 modulate = Color(0.73, 0.73, 0.73, 1)
+<<<<<<< HEAD
 position = Vector2(-2.9999847, -52.999996)
 scale = Vector2(0.99999994, 0.99999994)
+=======
+texture_repeat = 2
+position = Vector2(1, -56)
+>>>>>>> 0040dd6 (Almost done with parallax)
 texture = ExtResource("10_efxa6")
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 360)
+
+[node name="Sun" type="Sprite2D" parent="Parallax2D"]
+texture_repeat = 2
+position = Vector2(1, -102)
+texture = ExtResource("13_w48qg")
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 360)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -150,7 +182,3 @@ one_way_collision = true
 position = Vector2(150, -106)
 shape = SubResource("RectangleShape2D_272bh")
 one_way_collision = true
-
-[node name="Sun" type="Sprite2D" parent="."]
-position = Vector2(20, -60)
-texture = ExtResource("13_w48qg")
