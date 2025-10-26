@@ -81,12 +81,6 @@ func _physics_process(delta: float) -> void:
 		hurtbox.monitorable = true
 		hurtbox.monitoring = true
 
-	if input.crouch and is_grounded():
-		# Temporarily disable one-way collision
-		set_collision_mask_value(1, false)
-		await get_tree().create_timer(0.3).timeout
-		set_collision_mask_value(1, true)
-
 
 func _process(delta: float) -> void:
 	state_machine.update(delta)
