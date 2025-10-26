@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bdx3cerynkwbi"]
+[gd_scene load_steps=23 format=3 uid="uid://bdx3cerynkwbi"]
 
 [ext_resource type="Script" uid="uid://d0afis4vj66tf" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Script" uid="uid://dwatss17v6sy" path="res://state_machine/state_machine.gd" id="2_rkbax"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://raaue5ebiebo" path="res://player/states/jump.gd" id="5_rgyib"]
 [ext_resource type="Script" uid="uid://cftse0jl714nm" path="res://player/states/move.gd" id="6_hg6s5"]
 [ext_resource type="Script" uid="uid://dpngoys84lbbu" path="res://player/hitboxes/hitbox.gd" id="8_rgyib"]
-[ext_resource type="Script" uid="uid://6gtvxacowlxr" path="res://player/slash.gd" id="9_2ieo8"]
 [ext_resource type="Texture2D" uid="uid://b2ja7boe003hu" path="res://assets/PLAYER 1 SPRITE SHEET 64 BIT.png" id="9_8t03j"]
 [ext_resource type="Script" uid="uid://bpsxqo0flqles" path="res://player/hurtbox.gd" id="9_hg6s5"]
 [ext_resource type="Texture2D" uid="uid://u7iyxdd87o2e" path="res://assets/SLASH SPRITE.png" id="10_2ieo8"]
@@ -122,6 +121,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("KickHitbox/Slash:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_32hag"]
@@ -293,6 +304,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(33.785713, 21.42857)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("KickHitbox/Slash:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_kb6p2"]
@@ -496,7 +519,6 @@ position = Vector2(65.00009, 9.999999)
 scale = Vector2(4, 4)
 texture = ExtResource("10_2ieo8")
 hframes = 4
-script = ExtResource("9_2ieo8")
 
 [node name="KickHitbox" type="Area2D" parent="."]
 script = ExtResource("8_rgyib")
@@ -507,6 +529,13 @@ position = Vector2(33.785713, 21.42857)
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_rgyib")
 debug_color = Color(1.1070073e-06, 0.6320222, 0.45936626, 0.41960785)
+
+[node name="Slash" type="Sprite2D" parent="KickHitbox"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(65.00009, 9.999999)
+scale = Vector2(4, 4)
+texture = ExtResource("10_2ieo8")
+hframes = 4
 
 [node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource("9_hg6s5")
