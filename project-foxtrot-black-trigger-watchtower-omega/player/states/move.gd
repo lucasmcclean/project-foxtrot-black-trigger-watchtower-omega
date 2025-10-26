@@ -8,12 +8,12 @@ extends PlayerState
 func enter() -> void:
 	super()
 	if not player.animation.is_playing():
-		player.animation.play("walk")
+		player.animation.play("walk", -1, 10)
 
 
 func update(_delta: float):
 	if not player.animation.is_playing():
-		player.animation.play("walk")
+		player.animation.play("walk", -1, 10)
 
 
 func physics_update(delta: float) -> void:

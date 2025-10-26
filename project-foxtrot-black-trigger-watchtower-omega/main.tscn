@@ -40,12 +40,14 @@ position = Vector2(-1, -52)
 texture = ExtResource("2_ycdy4")
 
 [node name="Clouds" type="Sprite2D" parent="."]
-position = Vector2(-42, -33)
+position = Vector2(-41.999996, -33)
+scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("14_w48qg")
 
 [node name="Mountain" type="Sprite2D" parent="."]
 modulate = Color(0.73, 0.73, 0.73, 1)
-position = Vector2(-3, -53)
+position = Vector2(-2.9999847, -52.999996)
+scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("10_efxa6")
 
 [node name="HUD" type="CanvasLayer" parent="."]
