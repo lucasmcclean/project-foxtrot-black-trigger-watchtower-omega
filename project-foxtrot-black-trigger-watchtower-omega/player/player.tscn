@@ -14,7 +14,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 15.714285
-height = 48.571426
+height = 62.85714
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boad6"]
 size = Vector2(80, 29.285713)
@@ -23,7 +23,7 @@ size = Vector2(80, 29.285713)
 size = Vector2(82, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hg6s5"]
-size = Vector2(38.571587, 58.571655)
+size = Vector2(35.000145, 58.571655)
 
 [sub_resource type="Animation" id="Animation_ebec5"]
 length = 0.001
@@ -468,7 +468,7 @@ script = ExtResource("8_rgyib")
 type = 1
 
 [node name="Kicker" type="CollisionShape2D" parent="KickHitbox"]
-position = Vector2(70, 35.7143)
+position = Vector2(65.71427, 35.714302)
 shape = SubResource("RectangleShape2D_rgyib")
 debug_color = Color(1.1070073e-06, 0.6320222, 0.45936626, 0.41960785)
 
@@ -483,7 +483,7 @@ script = ExtResource("9_hg6s5")
 
 [node name="Hurter" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-2.1428566, 3.5714223)
-scale = Vector2(0.99999577, 0.99999577)
+scale = Vector2(0.9999956, 0.9999956)
 shape = SubResource("RectangleShape2D_hg6s5")
 debug_color = Color(0.88469225, 0.31448165, 0.2965871, 0.41960785)
 

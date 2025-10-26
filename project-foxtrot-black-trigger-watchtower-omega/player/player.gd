@@ -115,7 +115,8 @@ func punch() -> void:
 
 
 func kick() -> void:
-	animation.play("kick")
+	animation.stop()
+	animation.play("kick", -1, 10.0)
 	var overlapping_areas = kick_hitbox.get_overlapping_areas()
 	for area in overlapping_areas:
 		if area is Hurtbox:

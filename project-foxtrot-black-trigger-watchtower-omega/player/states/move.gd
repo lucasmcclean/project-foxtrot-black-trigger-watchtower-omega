@@ -19,6 +19,7 @@ func update(_delta: float):
 
 func physics_update(delta: float) -> void:
 	if player.input.jump and player.is_grounded():
+		print("We are getting the jump input")
 		state_machine.change_state(jump_state)
 		return
 	
