@@ -153,26 +153,13 @@ input = ExtResource("5_272bh")
 script = ExtResource("4_lquwl")
 
 [node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(0, -17)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
-position = Vector2(2, 49)
+position = Vector2(0, 78)
 shape = SubResource("RectangleShape2D_272bh")
 one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Platform"]
-position = Vector2(9, 70)
+position = Vector2(2, 99)
 texture = ExtResource("16_2cqfq")
-
-[node name="Platform2" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
-position = Vector2(-129, -38)
-shape = SubResource("RectangleShape2D_272bh")
-one_way_collision = true
-
-[node name="Platform3" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
-position = Vector2(150, -106)
-shape = SubResource("RectangleShape2D_272bh")
-one_way_collision = true
