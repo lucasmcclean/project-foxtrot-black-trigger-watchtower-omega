@@ -103,6 +103,7 @@ func is_grounded() -> bool:
 func punch() -> void:
 	animation.play("punch", -1, 10)
 	var overlapping_areas = punch_hitbox.get_overlapping_areas()
+	await get_tree().create_timer(0.25).timeout
 	for area in overlapping_areas:
 		if area is Hurtbox:
 			var hit_player = area.get_parent()
@@ -118,6 +119,7 @@ func punch() -> void:
 func kick() -> void:
 	animation.play("kick", -1, 15)
 	var overlapping_areas = kick_hitbox.get_overlapping_areas()
+	await get_tree().create_timer(0.25).timeout
 	for area in overlapping_areas:
 		if area is Hurtbox:
 			var hit_player = area.get_parent()
