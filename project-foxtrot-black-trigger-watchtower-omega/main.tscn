@@ -59,7 +59,7 @@ region_rect = Rect2(0, 0, 640, 358.75)
 [node name="Mountain" type="Sprite2D" parent="Parallax2D"]
 modulate = Color(0.73, 0.73, 0.73, 1)
 texture_repeat = 2
-position = Vector2(1, -56)
+position = Vector2(1, -54)
 texture = ExtResource("10_efxa6")
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 360)
