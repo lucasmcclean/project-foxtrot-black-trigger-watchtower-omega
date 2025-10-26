@@ -15,7 +15,7 @@ ACC_Y_RANGE = [-1.5, 1.5]
 # --- Data Collection Configuration ---
 SAMPLES_PER_WINDOW = 128  # 0.5 seconds at 256Hz (was 12 = 47ms)
 OVERLAP_SAMPLES = 0      # 25% overlap for smoother collection
-LABEL_MODE = 3            # Change to 1 when collecting command data
+LABEL_MODE = 1            # Change to 1 when collecting command data
 COUNT = 0
 
 class FeatureExtractor:
